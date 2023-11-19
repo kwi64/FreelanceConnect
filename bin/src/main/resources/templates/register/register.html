@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>FreelanceConnect</title>
+
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/fontawesome.all.min.css" rel="stylesheet">
+	<link href="/css/login-register.css" rel="stylesheet">
+
+	<script src="/js/jquery-3.7.1.min.js"></script>
+	<script src="/js/bootstrap.bundle.min.js"></script>
+	<script src="/js/jquery.validate.min.js"></script>
+	<script src="/js/additional-methods.min.js"></script>
+</head>
+
+<body>
+	<div class="d-flex bg-dark h-100 justify-content-center">
+		<div class="w-container d-flex h-100 text-light flex-column justify-content-center align-items-center">
+			<h1 class="text-start w-100">Freelance Connect</h1>
+			<div class="h-container d-flex h-50 w-100">
+				<img src="/img/login-bg.jpg" class="img object-fit-cover d-none d-md-block align-self-center"
+					alt="Freelance Connect">
+				<div
+					class="d-flex flex-grow-1 h-100 px-4 py-2 flex-column justify-content-center align-items-center align-self-center border border-secondary">
+					<h4>Register</h4>
+					<form class="col-12" id="form">
+						<div class="field mb-2">
+							<label for="name" class="form-label small m-0">Name</label>
+							<input type="text" name="name" class="form-control form-control-sm" id="name">
+						</div>
+						<div class="field mb-2">
+							<label for="email" class="form-label small m-0">Email address</label>
+							<input type="text" name="email" class="form-control form-control-sm" id="email">
+						</div>
+						<div class="field mb-2">
+							<label for="password" class="form-label small m-0">Password</label>
+							<input type="password" name="password" class="form-control form-control-sm" id="password"
+								autocomplete="new-password">
+						</div>
+						<div class="field mb-2">
+							<label for="password" class="form-label small m-0">Re-type Password</label>
+							<input type="password" name="password_again" class="form-control form-control-sm"
+								id="password_again" autocomplete="new-password">
+						</div>
+						<div class="field mb-2">
+							<p class="small m-0 p-0">Register as <i class="fa-solid fa-chevron-right fa-xs"></i></p>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" name="category" id="freelancer"
+									value="freelancer">
+								<label class="form-check-label small" for="freelancer">Freelancer</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" name="category" id="employer"
+									value="employer">
+								<label class="form-check-label small" for="employer">Employer</label>
+							</div>
+						</div>
+						<div class="d-flex w-100 mt-3 justify-content-between">
+							<a class="question text-light small" th:href="@{/login}">Already have an account?</a>
+							<button type="submit" class="d-flex btn btn-primary btn-sm">Register</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		$("#form").validate({
+			errorPlacement: function (error, element) {
+				error.appendTo(element.parents(".field"));
+			},
+			rules: {
+				name: {
+					required: true
+				},
+				email: {
+					required: true,
+					email: true
+				},
+				password: {
+					required: true,
+					minlength: 6
+				},
+				password_again: {
+					equalTo: "#password"
+				},
+				category: {
+					required: true
+				}
+			},
+			messages: {
+				name: "Please specify your name",
+				email: {
+					required: "Email address is needed.",
+					email: "Email address must be in the format of name@domain.com"
+				},
+				password: {
+					required: "Create a password for you account",
+					minlength: "Password must be atleast 6 characters long",
+				},
+				password_again: {
+					equalTo: "Passwords does not match",
+				},
+				category: {
+					required: "Choose your account type",
+				}
+			}
+		});
+	</script>
+	<!--<div th:fragment="container">
+		
+		
+		<div class="row">
+			<div class="col">
+				<p>Date: <input type="text" id="datepicker"></p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<form class="col-2" id="myform">
+					<div class="mb-3">
+						<label for="name" class="form-label small m-0">Name</label>
+						<input type="text" name="name" class="form-control form-control-sm" id="name">
+					</div>
+					<div class="mb-3">
+						<label for="email" class="form-label small m-0">Email address</label>
+						<input type="text" name="email" class="form-control form-control-sm" id="email">
+					</div>
+					<div class="mb-3">
+						<label for="password" class="form-label small m-0">Password</label>
+						<input type="password" class="form-control form-control-sm" id="password" autocomplete="new-password">
+					</div>
+					<div class="mb-3 form-check">
+						<input type="checkbox" class="form-check-input" id="check">
+						<label class="form-check-label small m-0" for="check">Check me out</label>
+					</div>
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col p-5 m-5">1</div>
+		</div>
+		<div class="row">
+			<div class="col p-5 m-5">1</div>
+		</div>
+		<div class="row">
+			<div class="col p-5 m-5">1</div>
+		</div>
+	</div>
+
+	<script th:fragment="script">
+		$(function () {
+			$("#datepicker").datepicker();
+		});
+
+		$("#myform").validate({
+			rules: {
+				name: {
+					required: true
+				},
+				email: {
+					required: true,
+					email: true
+				}
+			},
+			messages: {
+				name: "Please specify your name",
+				email: {
+					required: "We need your email address to contact you",
+					email: "Your email address must be in the format of name@domain.com"
+				}
+			}
+		});
+	</script>-->
+</body>
+
+</html>

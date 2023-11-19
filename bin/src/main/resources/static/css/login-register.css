@@ -1,0 +1,51 @@
+html,
+body {
+	height: 100%;
+	overflow: hidden;
+}
+
+.w-container {
+	width: 60%;
+	min-width: 400px;
+}
+
+.h-container {
+	min-height: 510px;
+}
+
+.img {
+	width: 60%;
+	height: 100%;
+}
+
+form label.error {
+	font-size: 9pt;
+	color: rgb(220, 53, 69);
+	position: relative;
+	top: -6px;
+	width: 100%;
+	white-space: nowrap;
+}
+
+form.field:has(> label.error) {
+	margin-bottom: 0 !important;
+}
+
+.question{
+	text-decoration: none;
+}
+.question:hover{
+	text-decoration: underline;
+}
+
+@media (max-width: 1200px) {
+	.w-container {
+		width: 85% !important;
+	}
+}
+
+@media (max-width: 1024px) {
+	.w-container {
+		width: 95% !important;
+	}
+}

@@ -27,7 +27,6 @@ public class UserProfile {
 	}
 	
 	public UserProfile() {
-		
 	}
 	public Long getId() {
 		return id;

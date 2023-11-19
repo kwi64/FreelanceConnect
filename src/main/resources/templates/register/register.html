@@ -25,19 +25,19 @@
 				<div
 					class="d-flex flex-grow-1 h-100 px-4 py-2 flex-column justify-content-center align-items-center align-self-center border border-secondary">
 					<h4>Register</h4>
-					<form class="col-12" id="form">
+					<form class="col-12" id="form" th:action="@{/register}" th:object="${createProfile}" method="post">
 						<div class="field mb-2">
 							<label for="name" class="form-label small m-0">Name</label>
-							<input type="text" name="name" class="form-control form-control-sm" id="name">
+							<input type="text" name="name" class="form-control form-control-sm" id="name" th:field="${createProfile.name}">
 						</div>
 						<div class="field mb-2">
 							<label for="email" class="form-label small m-0">Email address</label>
-							<input type="text" name="email" class="form-control form-control-sm" id="email">
+							<input type="text" name="email" class="form-control form-control-sm" id="email" th:field="${createProfile.email}">
 						</div>
 						<div class="field mb-2">
 							<label for="password" class="form-label small m-0">Password</label>
 							<input type="password" name="password" class="form-control form-control-sm" id="password"
-								autocomplete="new-password">
+								autocomplete="new-password" th:field="${createProfile.password}">
 						</div>
 						<div class="field mb-2">
 							<label for="password" class="form-label small m-0">Re-type Password</label>
@@ -48,12 +48,12 @@
 							<p class="small m-0 p-0">Register as <i class="fa-solid fa-chevron-right fa-xs"></i></p>
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="radio" name="category" id="freelancer"
-									value="freelancer">
+									value="freelancer" th:field="${createProfile.accountType}">
 								<label class="form-check-label small" for="freelancer">Freelancer</label>
 							</div>
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="radio" name="category" id="employer"
-									value="employer">
+									value="employer" th:field="${createProfile.accountType}">
 								<label class="form-check-label small" for="employer">Employer</label>
 							</div>
 						</div>

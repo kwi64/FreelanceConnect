@@ -4,16 +4,23 @@ body {
 	overflow: hidden;
 }
 
-#topNav .nav-link{
+#topNav .nav-link {
 	white-space: nowrap;
 }
-.dropdown-menu{
+
+.dropdown-menu {
 	min-width: auto;
 }
-form label.error{
+
+form label.error {
 	font-size: 9pt;
-	color: rgb(220,53,69);
+	color: rgb(220, 53, 69);
 	position: relative;
 	top: -6px;
+	width: 100%;
 	white-space: nowrap;
+}
+
+form.field:has(> label.error) {
+	margin-bottom: 0 !important;
 }

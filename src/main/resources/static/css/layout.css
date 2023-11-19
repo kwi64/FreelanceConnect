@@ -1,0 +1,19 @@
+html,
+body {
+	height: 100%;
+	overflow: hidden;
+}
+
+#topNav .nav-link{
+	white-space: nowrap;
+}
+.dropdown-menu{
+	min-width: auto;
+}
+form label.error{
+	font-size: 9pt;
+	color: rgb(220,53,69);
+	position: relative;
+	top: -6px;
+	white-space: nowrap;
+}

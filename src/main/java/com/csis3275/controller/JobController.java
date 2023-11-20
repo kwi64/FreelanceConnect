@@ -53,4 +53,11 @@ public class JobController {
 		jobList.clear();
 		return "redirect:/employer/viewJob";
 	}
+	
+	@GetMapping("/employer/viewApplication")
+	public String viewApplication(@RequestParam("ID") Long ID,Model model)	{
+		model.addAttribute("view", "employer/viewApplication/viewApplication");
+		model.addAttribute("viewJob", jobService.viewApplications((Long) ID));
+		return "layout";
+	}
 }

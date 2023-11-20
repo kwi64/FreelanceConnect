@@ -24,7 +24,7 @@ public class FreelanceConnectApplication {
 	@Bean
 	CommandLineRunner demo(UserServiceImpl repository)	{
 		return (args) -> {
-			repository.createProfile(new UserProfile("Jack Braun", "JackBraun@douglascollege.ca", "123456", "freelancer", null, null, null, null, null, null, null, null, null, null));
+			repository.createProfile(new UserProfile("Jack Braun", "JackBraun@douglascollege.ca", "123456", true, null, null, null, null, null, null, null, null, null, null));
 		};
 	}
 	

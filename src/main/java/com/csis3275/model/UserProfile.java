@@ -19,11 +19,10 @@ public class UserProfile {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
 	private String name;
 	private String email;
 	private String password;
-	private String accountType;
+	private Boolean isFreelancer;
 	private String address1;
 	private String address2;
 	private String city;
@@ -38,13 +37,13 @@ public class UserProfile {
 	private String skills;
 	//private boolean stillHired = false;
 	
-	public UserProfile(String name, String email, String password, String accountType, String address1, String address2,
+	public UserProfile(String name, String email, String password, Boolean isFreelancer, String address1, String address2,
 			String city, String province, String country, String title, String company, LocalDate dateOfHire, LocalDate dateOfQuit, String skills) {
 		super();
 		this.name = name;
 		this.email = email;
 		this.password = password;
-		this.accountType = accountType;
+		this.isFreelancer = isFreelancer;
 		this.address1 = address1;
 		this.address2 = address2;
 		this.city = city;
@@ -57,6 +56,7 @@ public class UserProfile {
 		this.skills = skills;
 		//this.stillHired = stillHired;
 	}
+	
 	public UserProfile() {
 	}
 	
@@ -84,11 +84,11 @@ public class UserProfile {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getAccountType() {
-		return accountType;
+	public Boolean getIsFreelancer() {
+		return isFreelancer;
 	}
-	public void setAccountType(String accountType) {
-		this.accountType = accountType;
+	public void setIsFreelancer(Boolean accountType) {
+		this.isFreelancer = accountType;
 	}
 	public String getAddress1() {
 		return address1;
@@ -150,16 +150,4 @@ public class UserProfile {
 	public void setSkills(String skills) {
 		this.skills = skills;
 	}
-	
-	/*
-	public boolean isStillHired() {
-		return stillHired;
-	}
-	public void setStillHired(boolean stillHired) {
-		this.stillHired = stillHired;
-	}
-	*/
-	
-	
-	
 }

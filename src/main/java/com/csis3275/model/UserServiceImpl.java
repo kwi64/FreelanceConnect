@@ -28,7 +28,7 @@ public class UserServiceImpl {
 	}
 	
 	public void updateInfo(UserProfile updatedUser) {
-		updatedUser.setAccountType("freelancer");
+		updatedUser.setIsFreelancer(true);
 		userProfileRepo.save(updatedUser);
 	}
 }

@@ -5,5 +5,17 @@
 	<title>FreelanceConnect</title>
 </head>
 <body>
+	<div th:fragment="container">
+		<div class="row">
+			<div class="col-4">
+				<h4>Manage Profile</h4>
+				<div class="field mb-2">
+					<tr th:each="user: ${userProfile}">
+						<td><a th:href="@{'/edit-profile?id=' + ${user.id}}" class="btn btn-warning">Edit Profile</a></td>	
+					</tr>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

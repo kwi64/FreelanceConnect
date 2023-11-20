@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>FreelanceConnect</title>
+</head>
+<body>
+	<div th:fragment="container">
+		<div class="row">
+			<div class="col-4">
+				<h4>Hi</h4>
+				<div class="field mb-2">	
+					<form class="col-2" id="myform" action="#" th:action="@{/edit-profile}" th:object="${editUser}" method="put">
+					<div class="mb-3" >
+						<label for="id" class="form-label small m-0">Id</label>
+						<input th:value="${editUser.id}" readonly></input>
+					</div>
+					<div class="mb-3" >
+						<label for="name" class="form-label small m-0">Name</label>
+						<input type="text" th:field="${editUser.name}" th:value="${editUser.name}" name="name" class="form-control form-control-sm" id="name">
+					</div>
+					<div class="mb-3">
+						<label for="email" class="form-label small m-0">Email address</label>
+						<input type="text" th:field="${editUser.email}" th:value="${editUser.email}" name="email" class="form-control form-control-sm" id="email">
+					</div>
+					<div class="mb-3">
+						<label for="password" class="form-label small m-0">Password</label>
+						<input type="password" th:field="${editUser.password}" th:value="${editUser.password}" class="form-control form-control-sm" id="password" autocomplete="new-password">
+					</div>
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

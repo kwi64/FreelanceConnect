@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IUserProfile extends CrudRepository<UserProfile, Long>	{
-	
+public interface IUserExperience extends CrudRepository<UserExperience, Long>{
+
 }

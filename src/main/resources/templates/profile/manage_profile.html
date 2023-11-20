@@ -13,9 +13,29 @@
 					<tr th:each="user: ${userProfile}">
 						<td><a th:href="@{'/edit-profile?id=' + ${user.id}}" class="btn btn-warning">Edit Profile</a></td>	
 						<td><a th:href="@{'/delete-profile?deleteuser=' + ${user.id}}" class="btn btn-warning">Delete Profile</a></td>
+						<td><a th:href="@{'/add-info?id=' + ${user.id}}" class="btn btn-warning">Add Info</a></td>
 					</tr>
 				</div>
-				
+			</div>
+			<div class="col-4">
+				<h4>Your current information</h4>
+				<div class="field mb-2">
+					<tr th:each="user: ${userProfile}">
+						<td>Name:</td>
+						<td th:text="${user.name}"></td>
+						<td>Email:</td>
+						<td th:text="${user.email}"></td>
+					</tr>
+				</div>
+				<div class="field mb-2">
+					<tr th:each="userLocation: ${userLocation}">
+						<td th:text="${userLocation.address1}"></td>
+						<td th:text="${userLocation.address2}"></td>
+						<td th:text="${userLocation.city}"></td>
+						<td th:text="${userLocation.province}"></td>
+						<td th:text="${userLocation.country}"></td>
+					</tr>
+				</div>
 			</div>
 		</div>
 	</div>

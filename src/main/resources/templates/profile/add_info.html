@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>FreelanceConnect</title>
+</head>
+<body>
+	<div th:fragment="container">
+		<div class="row">
+			<div class="col-4">
+				<h4>Add Location Information</h4>
+				<form class="col-2" id="myform" th:action="@{/add-info}" th:object="${createInfo}" method="post">
+					<div class="mb-3">
+							<label for="address1" class="form-label small m-0">Address Line 1</label>
+							<input type="text" style='width: 200px; height: 30px;' name="address1" class="form-control form-control-sm" id="address1" th:field="${createInfo.address1}" >
+						</div>
+						<div class="mb-3">
+							<label for="address2" class="form-label small m-0">Address Line 2</label>
+							<input type="text" style='width: 200px; height: 30px;' name="address2" class="form-control form-control-sm" id="address2" th:field="${createInfo.address2}">
+						</div>
+						<div class="mb-3">
+							<label for="city" class="form-label small m-0">City</label>
+							<input type="text" style='width: 200px; height: 30px;' name="city" class="form-control form-control-sm" id="city" th:field="${createInfo.city}">
+						</div>
+						<div class="mb-3">
+							<label for="province" class="form-label small m-0">Province/State</label>
+							<input type="text" style='width: 200px; height: 30px;' name="province" class="form-control form-control-sm" id="province" th:field="${createInfo.province}">
+						</div>
+						<div class="mb-3">
+							<label for="country" class="form-label small m-0">Country</label>
+							<input type="text" style='width: 200px; height: 30px;' name="country" class="form-control form-control-sm" id="country" th:field="${createInfo.country}">
+						</div>
+						<button type="submit" style='width: 200px; height: 45px;' class="btn btn-primary">Submit</button>
+					</div>
+				</form>
+				<div class="col-4">
+				<h4>Previous Work Experience</h4>
+				<form class="col-2" id="myform2" th:action="@{/add-info}" th:object="${createInfo}" method="post">
+					<div class="mb-3">
+							<label for="title" class="form-label small m-0">Title</label>
+							<input type="text" style='width: 200px; height: 30px;' name="title" class="form-control form-control-sm" id="title" th:field="${createInfo.address1}" >
+						</div>
+						<div class="mb-3">
+							<label for="company" class="form-label small m-0">Company</label>
+							<input type="text" style='width: 200px; height: 30px;' name="company" class="form-control form-control-sm" id="company" th:field="${createInfo.address2}">
+						</div>
+						<button type="submit" style='width: 200px; height: 45px;' class="btn btn-primary">Submit</button>
+					</div>
+				</form>
+			</div>
+			</div>
+			
+		</div>
+	</div>
+</body>
+</html>

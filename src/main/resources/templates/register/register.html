@@ -25,36 +25,43 @@
 				<div
 					class="d-flex flex-grow-1 h-100 px-4 py-2 flex-column justify-content-center align-items-center align-self-center border border-secondary">
 					<h4>Register</h4>
-					<form class="col-12" id="form">
+					<form class="col-12" id="form" method="post" action="" th:object="${user}">
 						<div class="field mb-2">
 							<label for="name" class="form-label small m-0">Name</label>
-							<input type="text" name="name" class="form-control form-control-sm" id="name">
+							<input type="text" th:field="*{name}" class="form-control form-control-sm" id="name">
 						</div>
 						<div class="field mb-2">
-							<label for="email" class="form-label small m-0">Email address</label>
-							<input type="text" name="email" class="form-control form-control-sm" id="email">
+							<label for="username" class="form-label small m-0">Email address</label>
+							<input type="text" th:field="*{username}" class="form-control form-control-sm"
+								id="username">
+							<div th:if="${username != null}" class="field">
+								<label class="error" th:text="${username}"></label>
+							</div>
 						</div>
 						<div class="field mb-2">
 							<label for="password" class="form-label small m-0">Password</label>
-							<input type="password" name="password" class="form-control form-control-sm" id="password"
-								autocomplete="new-password">
+							<input type="text" name="password" th:field="*{password}" class="form-control form-control-sm"
+								id="password" autocomplete="new-password">
 						</div>
 						<div class="field mb-2">
-							<label for="password" class="form-label small m-0">Re-type Password</label>
-							<input type="password" name="password_again" class="form-control form-control-sm"
+							<label for="password_again" class="form-label small m-0">Re-type Password</label>
+							<input type="text" name="password_again" th:value="*{password}" class="form-control form-control-sm"
 								id="password_again" autocomplete="new-password">
 						</div>
 						<div class="field mb-2">
 							<p class="small m-0 p-0">Register as <i class="fa-solid fa-chevron-right fa-xs"></i></p>
 							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio" name="category" id="freelancer"
-									value="freelancer">
+								<input class="form-check-input" type="radio" th:field="*{role}" id="freelancer"
+									value="FREELANCER">
 								<label class="form-check-label small" for="freelancer">Freelancer</label>
 							</div>
 							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio" name="category" id="employer"
-									value="employer">
+								<input class="form-check-input" type="radio" th:field="*{role}" id="employer"
+									value="EMPLOYER">
 								<label class="form-check-label small" for="employer">Employer</label>
+							</div>
+							<div th:if="${success != null}" class="field">
+								<label class="success" th:utext="${success}"></label>
 							</div>
 						</div>
 						<div class="d-flex w-100 mt-3 justify-content-between">
@@ -62,6 +69,7 @@
 							<button type="submit" class="d-flex btn btn-primary btn-sm">Register</button>
 						</div>
 					</form>
+
 				</div>
 			</div>
 		</div>
@@ -76,7 +84,7 @@
 				name: {
 					required: true
 				},
-				email: {
+				username: {
 					required: true,
 					email: true
 				},
@@ -87,13 +95,14 @@
 				password_again: {
 					equalTo: "#password"
 				},
-				category: {
-					required: true
+				role: {
+					required: true,
+					pattern: "FREELANCER|EMPLOYER"
 				}
 			},
 			messages: {
 				name: "Please specify your name",
-				email: {
+				username: {
 					required: "Email address is needed.",
 					email: "Email address must be in the format of name@domain.com"
 				},
@@ -104,8 +113,9 @@
 				password_again: {
 					equalTo: "Passwords does not match",
 				},
-				category: {
+				role: {
 					required: "Choose your account type",
+					pattern: "Not accepted"
 				}
 			}
 		});

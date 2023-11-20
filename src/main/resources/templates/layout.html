@@ -53,8 +53,8 @@
 							</a>
 						</li>-->
 					</ul>
-					<span class="navbar-text pe-2 w-100 text-end">
-						Welcome, User
+					<span class="navbar-text pe-2 w-100 text-end" th:if="${#authentication.isAuthenticated()}">
+						[[${#authentication.principal.displayName}]]
 					</span>
 					<!--<form class="d-flex" role="search">
 						<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -67,7 +67,7 @@
 							<button class="btn btn-outline-warning rounded-circle btn-sm" data-bs-toggle="dropdown">
 							<i class="fa-solid fa-user"></i></button>
 							<ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark p-0">
-								<li><a class="dropdown-item text-sm" href="#">Logout <span class="border-start border-2 border-secondary ms-1 ps-2 py-0"><i class="fa-solid fa-arrow-right-from-bracket fa-xs"></i></span></a></li>
+								<li><a class="dropdown-item text-sm" href="/logout">Logout <span class="border-start border-2 border-secondary ms-1 ps-2 py-0"><i class="fa-solid fa-arrow-right-from-bracket fa-xs"></i></span></a></li>
 							</ul>
 						</div>
 					</div>

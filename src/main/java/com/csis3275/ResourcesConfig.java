@@ -1,9 +1,11 @@
 package com.csis3275;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.CacheControl;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+@Configuration
 public class ResourcesConfig implements WebMvcConfigurer {
 
 	private static final String[] CLASSPATH_RESOURCE_LOCATIONS = { 

@@ -29,10 +29,20 @@ public class JobController {
 		return "layout";
 	}
 	
-	
 	@PostMapping("/employer/createJob")
 	public String addCreatedJob(Job createdJob)	{
 		jobList.add(createdJob);
+		return "redirect:/employer/viewJob";
+	}
+	
+	@GetMapping("/employer/previewJob")
+	public String previewJob(Model model) {
+		model.addAttribute("view", "employer/previewJob/previewJob");
+		return "layout";
+	}
+	
+	@PostMapping("/employer/previewJob")
+	public String previewJob(Job createdJob)	{
 		return "redirect:/employer/viewJob";
 	}
 }

@@ -16,10 +16,12 @@
     </div>
     <div class= "row">
     	<table>
+    	<tr>
     	<td>Job Title</td>
     	<td>Employer/Company Name</td>
     	<td>Location</td>
     	<td></td>
+    	</tr>
     		<tr th:each="job: ${jobList}">
 			<td th:text="${job.title}" />
 			<td th:text="${job.employerTitle}" />

@@ -32,12 +32,14 @@ public class JobController {
 	@PostMapping("/employer/createJob")
 	public String addCreatedJob(Job createdJob)	{
 		jobList.add(createdJob);
-		return "redirect:/employer/viewJob";
+		return "redirect:/employer/previewJob";
 	}
 	
 	@GetMapping("/employer/previewJob")
 	public String previewJob(Model model) {
 		model.addAttribute("view", "employer/previewJob/previewJob");
+		var preview = jobList.get(jobList.size() - 1) ;
+		model.addAttribute("preview", preview);
 		return "layout";
 	}
 	

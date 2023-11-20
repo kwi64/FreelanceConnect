@@ -19,12 +19,11 @@
 	<input type="text" th:field="${createJob.location}">
 	<br> 
 	<p>Validity</p>
-	<br>
-	<p>Start Date:</p>
-	<input type="text" th:field="${createJob.validityStartDate}">
-	<br>
-	<p>End Date: </p>
-	<input type="text" th:field="${createJob.validityEndDate}">
+	<p>From
+	<input type="date" th:field="${createJob.validityStartDate}">
+	To
+	<input type="date" th:field="${createJob.validityEndDate}">
+	</p>
 	<p>Job Description: </p>
 	<input type="text" th:field="${createJob.description}">
 	<p>

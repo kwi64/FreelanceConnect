@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +24,6 @@ public class ManageProfileController {
 	public String manageProfile(Model model) {
 		model.addAttribute("view", "profile/manage_profile");
 		model.addAttribute("userProfile", userService.getUserProfileInfo((long) 1));
-		//model.addAttribute("userLocation", userService.getUserLocationInfo((long) 1));
 		return "layout";
 	}
 	
@@ -38,24 +38,15 @@ public class ManageProfileController {
 	public String addInfo(@RequestParam("id") Long id, Model model) {
 		model.addAttribute("view", "profile/add_info");
 		model.addAttribute("createInfo", userService.getUserProfileInfo(id));
-		//model.addAttribute("createInfo", new UserProfile());
 		return "layout";
 	}
 	
 	@PostMapping("/add-info")
-	public String addInfo(UserProfile newInfo, Model model) {
-		model.addAttribute("view", "profile/add_info");
+	public String addInfo(UserProfile newInfo) {
 		userService.updateInfo(newInfo);
 		return "redirect:/manage-profile";
 	}
 	
-	/*
-	@PutMapping("/edit-profile")
-	public String editProfile(@RequestBody UserProfile updatedUser, Model model) {
-		model.addAttribute("view", "profile/edit_profile");
-		userService.updateUser(updatedUser);
-		return "redirect:/manage-profile";
-	}*/
 	
 	
 }

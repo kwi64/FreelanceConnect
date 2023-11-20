@@ -19,6 +19,7 @@ public class UserProfile {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
 	private String name;
 	private String email;
 	private String password;
@@ -30,14 +31,13 @@ public class UserProfile {
 	private String country;
 	private String title;
 	private String company;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	/*@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dateOfHire;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate dateOfQuit;
+	private LocalDate dateOfQuit;*/
 	
 	public UserProfile(String name, String email, String password, String accountType, String address1, String address2,
-			String city, String province, String country, String title, String company, LocalDate dateOfHire,
-			LocalDate dateOfQuit) {
+			String city, String province, String country, String title, String company) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -50,11 +50,12 @@ public class UserProfile {
 		this.country = country;
 		this.title = title;
 		this.company = company;
-		this.dateOfHire = dateOfHire;
-		this.dateOfQuit = dateOfQuit;
+		//this.dateOfHire = dateOfHire;
+		//this.dateOfQuit = dateOfQuit;
 	}
 	public UserProfile() {
 	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -127,7 +128,7 @@ public class UserProfile {
 	public void setCompany(String company) {
 		this.company = company;
 	}
-	public LocalDate getDateOfHire() {
+	/*public LocalDate getDateOfHire() {
 		return dateOfHire;
 	}
 	public void setDateOfHire(LocalDate dateOfHire) {
@@ -138,7 +139,7 @@ public class UserProfile {
 	}
 	public void setDateOfQuit(LocalDate dateOfQuit) {
 		this.dateOfQuit = dateOfQuit;
-	}
+	}*/
 	
 	
 }

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Freelance Connect</title>
+</head>
+<body>
+    <div th:fragment="container">
+    <div class= "row">
+    	<div class = "col">
+    		<p>My Postings</p>
+    	</div>
+    	<div class = "col offset-8">
+    		<p>Page 1 of 1</p>
+    	</div>
+    </div>
+    <div class= "row">
+    	<table>
+    		<tr>
+    			<td>Job Title</td>
+    			<td>Employer/Company Name</td>
+    			<td>Location</td>
+    			<td></td>
+    		</tr>
+    			<tr th:each="job: ${jobList}">
+				<td th:text="${job.title}" />
+				<td th:text="${job.employerTitle}" />
+				<td th:text="${job.location}" />
+				<td><a th:href="@{'/employer/viewApplication?ID=' + ${job.ID}}" class="btn" style="background-color: gray;">View Applications</a></td>
+			</tr>
+    	</table>
+    </div>
+    <a class="btn" style="background-color: gray;"href="createJob">Create New Posting</a>
+ 	<a class="btn" style="background-color: gray;float: right;"href="viewJob">Next</a>
+    </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Freelance Connect</title>
+</head>
+<body>
+    <div th:fragment="container">
+    
+    <h1>Preview</h1>
+    
+    <h3>
+    	<span th:text="${preview.title}" th:remove="tag"></span>
+    </h3>
+    <p> 
+    	<span th:text="${preview.employerTitle}" th:remove="tag"></span>
+    </p>
+    <p>
+    	<span th:text="${preview.location}" th:remove="tag"></span>
+    </p>
+    <p>
+    	<span th:text="${preview.validityStartDate}" th:remove="tag"></span>
+    	-
+    	<span th:text="${preview.validityEndDate}" th:remove="tag"></span>
+    </p>
+    <p>
+    	<span th:text="${preview.Description}" th:remove="tag"></span>
+    </p>
+    <form action="#" th:action="@{/employer/previewJob}" method="post">
+	<p>
+		<input type="submit" value="Submit"/> 
+	</p>
+    </div>
+</body>
+</html>

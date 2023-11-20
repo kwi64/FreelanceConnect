@@ -27,8 +27,24 @@ form label.error {
 	white-space: nowrap;
 }
 
+form label.success{
+	font-size: 10pt;
+	color: rgb(13, 202, 240);
+	position: relative;
+	width: 100%;
+	white-space: nowrap;
+}
+
 form.field:has(> label.error) {
 	margin-bottom: 0 !important;
+}
+
+form label a, form label a:visited, form label a:active{
+	text-decoration: none;
+	color: inherit;
+}
+form label a:hover{
+	text-decoration: underline;
 }
 
 .question{

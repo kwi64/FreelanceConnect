@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 
-import com.csis3275.model.UserLocation;
 import com.csis3275.model.UserProfile;
 import com.csis3275.model.UserServiceImpl;
 
@@ -22,8 +21,7 @@ public class FreelanceConnectApplication {
 	@Bean
 	CommandLineRunner demo(UserServiceImpl repository)	{
 		return (args) -> {
-			repository.createProfile(new UserProfile("Jack Braun", "JackBraun@douglascollege.ca", "123456", "freelancer"));
-			repository.addInfo(new UserLocation("123Street", null, "Vancouver", "BC", "Canada"));
+			repository.createProfile(new UserProfile("Jack Braun", "JackBraun@douglascollege.ca", "123456", "freelancer", null, null, null, null, null, null, null, null, null));
 		};
 	}
 

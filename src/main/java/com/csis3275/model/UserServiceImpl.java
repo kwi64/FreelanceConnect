@@ -12,11 +12,11 @@ public class UserServiceImpl {
 	@Autowired
 	private IUserProfile userProfileRepo;
 	
-	@Autowired
-	private IUserLocation userInfoRepo;
+	//@Autowired
+	//private IUserLocation userInfoRepo;
 	
-	@Autowired 
-	private IUserExperience userExperienceRepo;
+	//@Autowired 
+	//private IUserExperience userExperienceRepo;
 	
 	public UserProfile createProfile(UserProfile newUser) {
 		return userProfileRepo.save(newUser);
@@ -25,6 +25,21 @@ public class UserServiceImpl {
 	public UserProfile getUserProfileInfo(Long id) {
 		return userProfileRepo.findById(id).orElse(new UserProfile());
 	}
+	
+	public void deleteUser(Long id)
+	{
+		userProfileRepo.deleteById(id);
+	}
+	
+	public void updateInfo (UserProfile updatedUser) {
+		userProfileRepo.save(updatedUser);
+	}
+	
+	/*
+	public UserLocation addInfo (UserLocation newInfo) {
+		return userInfoRepo.save(newInfo);
+	}
+	
 	public UserLocation getUserLocationInfo(Long id) {
 		return userInfoRepo.findById(id).orElse(new UserLocation());
 	}
@@ -34,17 +49,6 @@ public class UserServiceImpl {
 		userInfoRepo.deleteById(id);
 	}
 	
-	public void deleteUser(Long id)
-	{
-		userProfileRepo.deleteById(id);
-	}
-	
-	public UserLocation addInfo (UserLocation newInfo) {
-		return userInfoRepo.save(newInfo);
-	}
-	
-	/*public void updateInfo () {
-	}*/
 	
 	/*public void updateUser(UserProfile updateUser) {
 		userProfileRepo.save(updateUser);

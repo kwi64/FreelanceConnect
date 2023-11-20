@@ -13,43 +13,62 @@
 					<div class="mb-3">
 							<label for="address1" class="form-label small m-0">Address Line 1</label>
 							<input type="text" style='width: 200px; height: 30px;' name="address1" class="form-control form-control-sm" id="address1" th:field="${createInfo.address1}" >
-						</div>
-						<div class="mb-3">
-							<label for="address2" class="form-label small m-0">Address Line 2</label>
-							<input type="text" style='width: 200px; height: 30px;' name="address2" class="form-control form-control-sm" id="address2" th:field="${createInfo.address2}">
-						</div>
-						<div class="mb-3">
-							<label for="city" class="form-label small m-0">City</label>
-							<input type="text" style='width: 200px; height: 30px;' name="city" class="form-control form-control-sm" id="city" th:field="${createInfo.city}">
-						</div>
-						<div class="mb-3">
-							<label for="province" class="form-label small m-0">Province/State</label>
-							<input type="text" style='width: 200px; height: 30px;' name="province" class="form-control form-control-sm" id="province" th:field="${createInfo.province}">
-						</div>
-						<div class="mb-3">
-							<label for="country" class="form-label small m-0">Country</label>
-							<input type="text" style='width: 200px; height: 30px;' name="country" class="form-control form-control-sm" id="country" th:field="${createInfo.country}">
-						</div>
-						<button type="submit" style='width: 200px; height: 45px;' class="btn btn-primary">Submit</button>
 					</div>
+					<div class="mb-3">
+						<label for="address2" class="form-label small m-0">Address Line 2</label>
+						<input type="text" style='width: 200px; height: 30px;' name="address2" class="form-control form-control-sm" id="address2" th:field="${createInfo.address2}">
+					</div>
+					<div class="mb-3">
+						<label for="city" class="form-label small m-0">City</label>
+						<input type="text" style='width: 200px; height: 30px;' name="city" class="form-control form-control-sm" id="city" th:field="${createInfo.city}">
+					</div>
+					<div class="mb-3">
+						<label for="province" class="form-label small m-0">Province/State</label>
+						<input type="text" style='width: 200px; height: 30px;' name="province" class="form-control form-control-sm" id="province" th:field="${createInfo.province}">
+					</div>
+					<div class="mb-3">
+						<label for="country" class="form-label small m-0">Country</label>
+						<input type="text" style='width: 200px; height: 30px;' name="country" class="form-control form-control-sm" id="country" th:field="${createInfo.country}">
+					</div>
+					<button type="submit" style='width: 200px; height: 45px;' class="btn btn-primary">Submit</button>
 				</form>
-				<div class="col-4">
+			</div>
+			<div class="col-4">
 				<h4>Previous Work Experience</h4>
 				<form class="col-2" id="myform2" th:action="@{/add-info}" th:object="${createInfo}" method="post">
 					<div class="mb-3">
-							<label for="title" class="form-label small m-0">Title</label>
-							<input type="text" style='width: 200px; height: 30px;' name="title" class="form-control form-control-sm" id="title" th:field="${createInfo.address1}" >
-						</div>
-						<div class="mb-3">
-							<label for="company" class="form-label small m-0">Company</label>
-							<input type="text" style='width: 200px; height: 30px;' name="company" class="form-control form-control-sm" id="company" th:field="${createInfo.address2}">
-						</div>
-						<button type="submit" style='width: 200px; height: 45px;' class="btn btn-primary">Submit</button>
+						<label for="title" class="form-label small m-0">Title</label>
+						<input type="text" style='width: 200px; height: 30px;' name="title" class="form-control form-control-sm" id="title" th:field="${createInfo.title}" >
 					</div>
+					<div class="mb-3">
+						<label for="company" class="form-label small m-0">Company</label>
+						<input type="text" style='width: 200px; height: 30px;' name="company" class="form-control form-control-sm" id="company" th:field="${createInfo.company}">
+					</div>
+					<button type="submit" style='width: 200px; height: 45px;' class="btn btn-primary">Submit</button>
 				</form>
 			</div>
+			<div class="col-4">
+				<h4>Account Infomation</h4>	
+				<form class="col-2" id="myform3" th:action="@{/add-info}" th:object="${createInfo}" method="post">
+					<div class="mb-3" >
+						<label for="id" class="form-label small m-0">Id</label>
+						<input th:value="${createInfo.id}" readonly style='width: 200px; height: 30px;'></input>
+					</div>
+					<div class="mb-3" >
+						<label for="name" class="form-label small m-0">Name</label>
+						<input type="text" th:field="${createInfo.name}" th:value="${createInfo.name}" style='width: 200px; height: 30px;' name="name" class="form-control form-control-sm" id="name">
+					</div>
+					<div class="mb-3">
+						<label for="email" class="form-label small m-0">Email address</label>
+						<input type="text" th:field="${createInfo.email}" th:value="${createInfo.email}" style='width: 200px; height: 30px;' name="email" class="form-control form-control-sm" id="email">
+					</div>
+					<div class="mb-3">
+						<label for="password" class="form-label small m-0">Password</label>
+						<input type="password" th:field="${createInfo.password}" th:value="${createInfo.password}" style='width: 200px; height: 30px;' class="form-control form-control-sm" id="password" autocomplete="new-password">
+					</div>
+					<button type="submit" style='width: 200px; height: 45px;' class="btn btn-primary">Submit</button>
+				</form>
 			</div>
-			
 		</div>
 	</div>
 </body>

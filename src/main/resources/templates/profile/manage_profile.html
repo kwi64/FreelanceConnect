@@ -11,9 +11,8 @@
 				<h4>Manage Profile</h4>
 				<div class="field mb-2">
 					<tr th:each="user: ${userProfile}">
-						<td><a th:href="@{'/edit-profile?id=' + ${user.id}}" class="btn btn-warning">Edit Profile</a></td>	
 						<td><a th:href="@{'/delete-profile?deleteuser=' + ${user.id}}" class="btn btn-warning">Delete Profile</a></td>
-						<td><a th:href="@{'/add-info?id=' + ${user.id}}" class="btn btn-warning">Add Info</a></td>
+						<td><a th:href="@{'/add-info?id=' + ${user.id}}" class="btn btn-warning">Edit Profile</a></td>
 					</tr>
 				</div>
 			</div>
@@ -21,14 +20,12 @@
 				<h4>Your current information</h4>
 				<div class="field mb-2">
 					<tr th:each="user: ${userProfile}">
-						<td>Name:</td>
 						<td th:text="${user.name}"></td>
-						<td>Email:</td>
 						<td th:text="${user.email}"></td>
 					</tr>
 				</div>
 				<div class="field mb-2">
-					<tr th:each="userLocation: ${userLocation}">
+					<tr th:each="userLocation: ${userProfile}">
 						<td th:text="${userLocation.address1}"></td>
 						<td th:text="${userLocation.address2}"></td>
 						<td th:text="${userLocation.city}"></td>

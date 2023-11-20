@@ -22,7 +22,9 @@ public class Job {
 	private String validityStartDate;
 	private String validityEndDate;
 	private Long wage;
-	
+	public Long getId() {
+		return ID;
+	}
 	public Job() {}
 	
 	public Job(Long jID,

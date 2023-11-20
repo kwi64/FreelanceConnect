@@ -14,18 +14,6 @@ import com.csis3275.model.Job;
 public class JobController {
 
 	private ArrayList<Job> jobList = new ArrayList<Job>();
-	public JobController() {
-		jobList.add(new Job((long) 1, "Software Engineer", "Electronic Arts", 
-				"Vancouver, BC", "Be a software Engineer in Vancouver, BC", "1", "2", (long) 15.00));
-		jobList.add(new Job((long) 2, "Software Engineer", "Electronic Arts", 
-				"Vancouver, BC", "Be a software Engineer in Vancouver, BC", "1", "2", (long) 15.00));
-		jobList.add(new Job((long) 3, "Software Engineer", "Electronic Arts", 
-				"Vancouver, BC", "Be a software Engineer in Vancouver, BC", "1", "2", (long) 15.00));
-		jobList.add(new Job((long) 4, "Software Engineer", "Electronic Arts", 
-				"Vancouver, BC", "Be a software Engineer in Vancouver, BC", "1", "2", (long) 15.00));
-		jobList.add(new Job((long) 5, "Software Engineer", "Electronic Arts", 
-				"Vancouver, BC", "Be a software Engineer in Vancouver, BC", "1", "2", (long) 15.00));
-	}
 	
 	@GetMapping("/employer/viewJob")
 	public String viewJob(Model model) {
@@ -45,6 +33,6 @@ public class JobController {
 	@PostMapping("/employer/createJob")
 	public String addCreatedJob(Job createdJob)	{
 		jobList.add(createdJob);
-		return "layout";
+		return "redirect:/employer/viewJob";
 	}
 }

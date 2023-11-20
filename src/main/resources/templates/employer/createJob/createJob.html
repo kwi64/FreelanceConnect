@@ -5,6 +5,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div th:fragment="container">
 	<h1>Create New Job Posting</h1>
 	<form action="#" th:action="@{/employer/createJob}" th:object="${createJob}"
 		method="post">
@@ -15,20 +16,22 @@
 	<input type="text" th:field="${createJob.employerTitle}">
 	<br> 
 	<p>Location</p>
-	<input type="email" th:field="${createJob.location}">
+	<input type="text" th:field="${createJob.location}">
 	<br> 
 	<p>Validity</p>
 	<br>
 	<p>Start Date:</p>
-	<input type="text" th:field="${addStudent.lastName}">
+	<input type="text" th:field="${createJob.validityStartDate}">
 	<br>
 	<p>End Date: </p>
-	<input type="text" th:field="${addStudent.lastName}">
+	<input type="text" th:field="${createJob.validityEndDate}">
+	<p>Job Description: </p>
+	<input type="text" th:field="${createJob.description}">
 	<p>
 		<input type="submit" value="Submit"/> 
 	</p>
 
 	</form>
-
+</div>
 </body>
 </html>

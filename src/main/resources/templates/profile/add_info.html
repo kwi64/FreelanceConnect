@@ -3,6 +3,8 @@
 <head>
 	<meta charset="ISO-8859-1">
 	<title>FreelanceConnect</title>
+	<script src="/js/jquery-3.7.1.min.js"></script>
+	<script src="/js/jquery.validate.min.js"></script>
 </head>
 <body>
 	<div th:fragment="container">
@@ -46,7 +48,7 @@
 					</div>
 					<div class="mb-3">
 						<label for="password" class="form-label small m-0">Password</label>
-						<input type="password" th:field="${createInfo.password}" th:value="${createInfo.password}" style='width: 200px; height: 30px;' class="form-control form-control-sm" id="password" autocomplete="new-password">
+						<input type="password" th:field="${createInfo.password}" style='width: 200px; height: 30px;' class="form-control form-control-sm" id="password" autocomplete="new-password">
 					</div>
 					<h4>Work Experience</h4>
 					<div class="mb-3">
@@ -62,5 +64,34 @@
 			</div>
 		</div>
 	</div>
+	
+	<script th:fragment="script">
+		$("#myform").validate({
+			rules: {
+				name: {
+					required: true
+				},
+				email: {
+					required: true,
+					email: true
+				},
+				password: {
+					required: true,
+					minlength: 6
+				},
+			},
+			messages: {
+				name: "Please specify your name",
+				email: {
+					required: "Email address is needed.",
+					email: "Email address must be in the format of name@domain.com"
+				},
+				password: {
+					required: "Change your password now, or type it in to confirm other changes",
+					minlength: "Password must be atleast 6 characters long",
+				},
+			}
+		});
+	</script>
 </body>
 </html>

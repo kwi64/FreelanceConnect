@@ -30,13 +30,13 @@ public class ManageProfileController {
 	@GetMapping("/delete-profile")
 	public String deleteUser(@RequestParam("deleteuser") String id)	{
 		userService.deleteUser(Long.parseLong(id));
-		//userService.deleteUserLocation(Long.parseLong(id));
 		return "redirect:/login";	
 	}
 	
 	@GetMapping("/add-info")
 	public String addInfo(@RequestParam("id") Long id, Model model) {
 		model.addAttribute("view", "profile/add_info");
+		model.addAttribute("script", true);
 		model.addAttribute("createInfo", userService.getUserProfileInfo(id));
 		return "layout";
 	}

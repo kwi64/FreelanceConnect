@@ -5,15 +5,16 @@
 	<title>FreelanceConnect</title>
 	<script src="/js/jquery-3.7.1.min.js"></script>
 	<script src="/js/jquery.validate.min.js"></script>
+	
+	<link href="/css/add-info.css" rel="stylesheet">
 </head>
 <body>
 	<div th:fragment="container">
 		<div class="row">
 			<div class="col-5">
-				<h4>Add Location Information</h4>
 				<form class="col-6" action="#" id="myform" th:action="@{/add-info}" th:object="${createInfo}" method="POST">
 					<div class="mb-3" >
-						<label for="id" class="form-label small m-0">Id</label>
+						<label for="id" class="form-label small m-0">Your Account Id Is:</label>
 						<input th:field="${createInfo.id}" th:value="${createInfo.id}" readonly style='width: 200px; height: 30px;'></input>
 					</div>
 					<h4>Location Info</h4>
@@ -67,7 +68,14 @@
 						<label for="quitDate" class="form-label small m-0">Date of Departure</label>
 						<input type="date" style='width: 200px; height: 30px;'name="quitDate" class="form-control form-control-sm" id="quitDate" th:field="${createInfo.dateOfQuit}"/>
 					</div>
+					<h4>Skills</h4>
+					<div class="mb-3">
+						<label for="skills" style='width: 200px; height: 30px;' class="form-label small m-0">Please enter any skills you would like potential employers to know</label>
+						<textarea rows="4" cols="30" style='width: 200px; height: 30px;' name="skills" class="form-control form-control-sm" id="skills" th:field="${createInfo.skills}" />
+					</div>
 					<button type="submit" style='width: 200px; height: 45px;' class="btn btn-primary">Submit</button>
+					</td>
+					</fieldset>
 				</form>
 			</div>
 		</div>

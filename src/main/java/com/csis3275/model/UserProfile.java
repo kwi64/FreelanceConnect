@@ -35,10 +35,11 @@ public class UserProfile {
 	private LocalDate dateOfHire;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dateOfQuit;
+	private String skills;
 	//private boolean stillHired = false;
 	
 	public UserProfile(String name, String email, String password, String accountType, String address1, String address2,
-			String city, String province, String country, String title, String company, LocalDate dateOfHire, LocalDate dateOfQuit) {
+			String city, String province, String country, String title, String company, LocalDate dateOfHire, LocalDate dateOfQuit, String skills) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -53,6 +54,7 @@ public class UserProfile {
 		this.company = company;
 		this.dateOfHire = dateOfHire;
 		this.dateOfQuit = dateOfQuit;
+		this.skills = skills;
 		//this.stillHired = stillHired;
 	}
 	public UserProfile() {
@@ -142,6 +144,13 @@ public class UserProfile {
 	public void setDateOfQuit(LocalDate dateOfQuit) {
 		this.dateOfQuit = dateOfQuit;
 	}
+	public String getSkills() {
+		return skills;
+	}
+	public void setSkills(String skills) {
+		this.skills = skills;
+	}
+	
 	/*
 	public boolean isStillHired() {
 		return stillHired;

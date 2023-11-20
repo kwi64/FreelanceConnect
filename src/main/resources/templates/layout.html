@@ -53,7 +53,7 @@
 							</a>
 						</li>-->
 					</ul>
-					<span class="navbar-text pe-2 w-100 text-end" th:if="${#authentication.isAuthenticated()}">
+					<span class="navbar-text pe-2 w-100 text-end text-capitalize" th:if="${#authentication.isAuthenticated()}">
 						[[${#authentication.principal.displayName}]]
 					</span>
 					<!--<form class="d-flex" role="search">

@@ -21,6 +21,14 @@ form label.error {
 	white-space: nowrap;
 }
 
+form label.success{
+	font-size: 10pt;
+	color: rgb(13, 202, 240);
+	position: relative;
+	width: 100%;
+	white-space: nowrap;
+}
+
 form.field:has(> label.error) {
 	margin-bottom: 0 !important;
 }

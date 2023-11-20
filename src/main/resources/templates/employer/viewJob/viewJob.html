@@ -16,18 +16,18 @@
     </div>
     <div class= "row">
     	<table>
-    	<tr>
-    	<td>Job Title</td>
-    	<td>Employer/Company Name</td>
-    	<td>Location</td>
-    	<td></td>
-    	</tr>
-    		<tr th:each="job: ${jobList}">
-			<td th:text="${job.title}" />
-			<td th:text="${job.employerTitle}" />
-			<td th:text="${job.location}" />
-			<td><a th:href="@{'/employer/job/viewApplication?id=' + ${job.ID}}" class="btn" style="background-color: gray;">View Applications</a></td>
-		</tr>
+    		<tr>
+    			<td>Job Title</td>
+    			<td>Employer/Company Name</td>
+    			<td>Location</td>
+    			<td></td>
+    		</tr>
+    			<tr th:each="job: ${jobList}">
+				<td th:text="${job.title}" />
+				<td th:text="${job.employerTitle}" />
+				<td th:text="${job.location}" />
+				<td><a th:href="@{'/employer/job/viewApplication?id=' + ${job.ID}}" class="btn" style="background-color: gray;">View Applications</a></td>
+			</tr>
     	</table>
     </div>
     <a class="btn" style="background-color: gray;"href="createJob">Create New Posting</a>

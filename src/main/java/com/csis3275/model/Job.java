@@ -16,12 +16,14 @@ public class Job {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long ID;
 	private String title;
-	private String EmployerTitle;
+	private String employerTitle;
 	private String location;
 	private String description;
 	private String validityStartDate;
 	private String validityEndDate;
 	private Long wage;
+	
+	public Job() {}
 	
 	public Job(Long jID,
 			String jTitle, 
@@ -31,10 +33,10 @@ public class Job {
 			String jValidityStartDate,
 			String jValidityEndDate,
 			Long jWage)	{
-		
+		super();
 		this.ID = jID;
 		this.title = jTitle;
-		this.EmployerTitle = jEmployerTitle;
+		this.employerTitle = jEmployerTitle;
 		this.location = jLocation;
 		this.validityStartDate = jValidityStartDate;
 		this.validityEndDate = jValidityEndDate;
@@ -43,6 +45,10 @@ public class Job {
 	}
 
 	
+
+	
+
+
 
 	public Long getID() {
 		return ID;
@@ -58,12 +64,14 @@ public class Job {
 		this.title = title;
 	}
 
+	
+
 	public String getEmployerTitle() {
-		return EmployerTitle;
+		return employerTitle;
 	}
 
 	public void setEmployerTitle(String employerTitle) {
-		EmployerTitle = employerTitle;
+		this.employerTitle = employerTitle;
 	}
 
 	public String getLocation() {

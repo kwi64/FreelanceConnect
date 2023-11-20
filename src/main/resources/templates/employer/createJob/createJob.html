@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Create New Job Posting</h1>
+	<form action="#" th:action="@{/employer/createJob}" th:object="${createJob}"
+		method="post">
+	<p>Title</p>
+	<input type="text" th:field="${createJob.title}">
+	<br> 
+	<p>Employer/Company Name</p>
+	<input type="text" th:field="${createJob.employerTitle}">
+	<br> 
+	<p>Location</p>
+	<input type="email" th:field="${createJob.location}">
+	<br> 
+	<p>Validity</p>
+	<br>
+	<p>Start Date:</p>
+	<input type="text" th:field="${addStudent.lastName}">
+	<br>
+	<p>End Date: </p>
+	<input type="text" th:field="${addStudent.lastName}">
+	<p>
+		<input type="submit" value="Submit"/> 
+	</p>
+
+	</form>
+
+</body>
+</html>

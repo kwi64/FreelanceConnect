@@ -32,6 +32,12 @@ public class ManageProfileController {
 		return "profile/edit_profile";
 	}
 	
+	@GetMapping("/delete-profile")
+	public String deleteUser(@RequestParam("deleteuser") String id)	{
+	userService.deleteUser(Long.parseLong(id));
+	return "redirect:/login";	
+	}
+	
 	/*
 	@PutMapping("/edit-profile")
 	public String editProfile(@RequestBody UserProfile updatedUser, Model model) {
@@ -39,5 +45,6 @@ public class ManageProfileController {
 		userService.updateUser(updatedUser);
 		return "redirect://manage-profile";
 	}*/
+	
 	
 }

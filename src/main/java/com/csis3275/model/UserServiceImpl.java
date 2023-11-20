@@ -20,7 +20,12 @@ public class UserServiceImpl {
 		return userProfileRepo.findById(id).orElse(new UserProfile());
 	}
 	
-	public void updateUser(UserProfile updateUser) {
-		userProfileRepo.save(updateUser);
+	public void deleteUser(Long id)
+	{
+		userProfileRepo.deleteById(id);
 	}
+	/*public void updateUser(UserProfile updateUser) {
+		userProfileRepo.save(updateUser);
+	}*/
+	
 }

@@ -59,12 +59,19 @@
 						<label for="company" class="form-label small m-0">Company</label>
 						<input type="text" style='width: 200px; height: 30px;' name="company" class="form-control form-control-sm" id="company" th:field="${createInfo.company}">
 					</div>
+					<div class="mb-3">
+						<label for="hireDate" class="form-label small m-0">Date of Hire</label>
+						<input type="date" style='width: 200px; height: 30px;'name="hireDate" class="form-control form-control-sm" id="hireDate" th:field="${createInfo.dateOfHire}"/>
+					</div>
+					<div class="mb-3">
+						<label for="quitDate" class="form-label small m-0">Date of Departure</label>
+						<input type="date" style='width: 200px; height: 30px;'name="quitDate" class="form-control form-control-sm" id="quitDate" th:field="${createInfo.dateOfQuit}"/>
+					</div>
 					<button type="submit" style='width: 200px; height: 45px;' class="btn btn-primary">Submit</button>
 				</form>
 			</div>
 		</div>
 	</div>
-	
 	<script th:fragment="script">
 		$("#myform").validate({
 			rules: {

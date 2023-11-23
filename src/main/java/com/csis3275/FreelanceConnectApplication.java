@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 
 import com.csis3275.model.Role;
 import com.csis3275.model.User;
-import com.csis3275.model.UserDAO;
+import com.csis3275.model.UserService;
 
 @SpringBootApplication
 public class FreelanceConnectApplication {
@@ -18,7 +18,7 @@ public class FreelanceConnectApplication {
 	}
 	
 	@Bean
-	CommandLineRunner seedUsers(UserDAO userDAO) {
+	CommandLineRunner seedUsers(UserService userDAO) {
 		return (args) -> {
 			userDAO.createUser(new User("Freelancer", "freelancer@connect.com", "password", Role.FREELANCER, true));
 			userDAO.createUser(new User("Employer", "employer@connect.com", "password", Role.EMPLOYER, true));

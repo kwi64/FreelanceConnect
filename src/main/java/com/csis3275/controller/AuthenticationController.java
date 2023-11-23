@@ -13,9 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.csis3275.model.User;
-import com.csis3275.model.UserDAO;
+import com.csis3275.model.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,7 +25,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class AuthenticationController {
 
 	@Autowired
-	private UserDAO userDAO;
+	private UserService userDAO;
 
 	@GetMapping("/login")
 	public String login(Model model, @RequestParam("error") Optional<String> error) {
@@ -44,8 +45,10 @@ public class AuthenticationController {
 	}
 
 	@PostMapping("/register")
-	public String doRegister(User user, Model model) {
-
+	public String doRegister(User user, Model model, RedirectAttributes attributes) {
+		
+		user.setUsername(user.getUsername().trim());
+		
 		User existing = userDAO.findUserByUsername(user.getUsername());
 		if (existing != null) {
 
@@ -57,10 +60,11 @@ public class AuthenticationController {
 		}
 
 		userDAO.createUser(user);
-		model.addAttribute("user", new User());
 
-		model.addAttribute("success", "Account successfully created!. <a href='/login'><i>Please log in!</i></a>");
-		return "register/register";
+		attributes.addFlashAttribute("user", new User());
+		attributes.addFlashAttribute("success", "Account successfully created!. Please log in!");
+		
+		return "redirect:/login";
 	}
 	
 	@GetMapping("/logout")

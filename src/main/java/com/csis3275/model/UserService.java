@@ -1,36 +1,33 @@
 package com.csis3275.model;
 
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService implements UserDetailsService {
-
-	private UserDAO userDAO;
-
-	public UserService(UserDAO dao) {
-		this.userDAO = dao;
+public class UserService {
+	@Autowired
+	private IUserRepository repository;
+	
+	
+	public User createUser(User user) {
+		user.setUsername(user.getUsername().trim());
+		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+		user.setEnabled(true);
+		return repository.save(user);
 	}
-
-	@Override
-	public UserPrincipal loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = userDAO.findUserByUsername(username);
-
-		if (user == null) {
-			new UsernameNotFoundException("User not found with email: " + username);
-		}
-
-//		GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole());
-
-//		return org.springframework.security.core.userdetails.User
-//                .withUsername(user.getUsername())
-//                .password(user.getPassword())
-//                .roles(authority.getAuthority())
-//                .accountLocked(false)
-//                .build();
-
-		return new UserPrincipal(user.getId(), user.getName(), user.getUsername(), user.getPassword(), user.getRole(), user.isEnabled());
+	
+	public User findUserByUsername(String username) {
+		List<User> users = (List<User>)repository.findAll();
+		User user = null;
+		for(User u : users) {
+			if(u.getUsername().equals(username)) {
+				user = u;
+			}
+	    }
+		return user;
 	}
-
 }

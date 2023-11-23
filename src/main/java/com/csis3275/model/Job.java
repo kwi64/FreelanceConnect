@@ -2,6 +2,8 @@ package com.csis3275.model;
 
 
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,8 +21,8 @@ public class Job {
 	private String employerTitle;
 	private String location;
 	private String description;
-	private String validityStartDate;
-	private String validityEndDate;
+	private LocalDate validityStartDate;
+	private LocalDate validityEndDate;
 	private Long wage;
 	public Long getId() {
 		return ID;
@@ -32,8 +34,8 @@ public class Job {
 			String jEmployerTitle, 
 			String  jLocation,
 			String jDesc, 
-			String jValidityStartDate,
-			String jValidityEndDate,
+			LocalDate jValidityStartDate,
+			LocalDate jValidityEndDate,
 			Long jWage)	{
 		super();
 		this.ID = jID;
@@ -99,16 +101,17 @@ public class Job {
 	public void setWage(Long wage) {
 		this.wage = wage;
 	}
-	public String getValidityStartDate() {
+	public LocalDate getValidityStartDate() {
 		return validityStartDate;
 	}
-	public void setValidityStartDate(String validityStartDate) {
+	public void setValidityStartDate(LocalDate validityStartDate) {
 		this.validityStartDate = validityStartDate;
 	}
-	public String getValidityEndDate() {
+	public LocalDate getValidityEndDate() {
 		return validityEndDate;
 	}
-	public void setValidityEndDate(String validityEndDate) {
+	public void setValidityEndDate(LocalDate validityEndDate) {
 		this.validityEndDate = validityEndDate;
 	}
+	
 }

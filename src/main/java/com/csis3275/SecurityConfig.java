@@ -1,25 +1,14 @@
 package com.csis3275;
 
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -59,8 +48,7 @@ public class SecurityConfig {
 			auth.requestMatchers(mvcMatcherBuilder.pattern("/css/**"), mvcMatcherBuilder.pattern("/img/**"),
 					mvcMatcherBuilder.pattern("/js/**"), mvcMatcherBuilder.pattern("/webfonts/**")).permitAll();
 			auth.requestMatchers(PathRequest.toH2Console()).permitAll();
-			auth.requestMatchers(mvcMatcherBuilder.pattern("/login"), mvcMatcherBuilder.pattern("/register"))
-					.permitAll();
+			auth.requestMatchers(mvcMatcherBuilder.pattern("/login"), mvcMatcherBuilder.pattern("/register")).permitAll();
 			auth.requestMatchers(mvcMatcherBuilder.pattern("/freelancer/**")).hasRole("FREELANCER");
 			auth.requestMatchers(mvcMatcherBuilder.pattern("/employer/**")).hasRole("EMPLOYER");
 			auth.anyRequest().authenticated();
@@ -69,18 +57,22 @@ public class SecurityConfig {
 		http.formLogin(l -> {
 			l.loginPage("/login").permitAll();
 			l.failureHandler((request, response, exception) -> {
-				response.sendRedirect("/login?error=Email or password is wrong");
+				if (exception instanceof DisabledException) {
+					response.sendRedirect("/login?error=Sorry, your account is disabled!");
+				}else {
+					response.sendRedirect("/login?error=Email or password is wrong!");
+				}
 			});
 			l.successHandler((request, response, exception) -> {
 				response.sendRedirect("/");
 			});
 		});
 
-//		http.exceptionHandling(e -> {
-//			e.accessDeniedHandler((request, response, exception) -> {
-//				response.sendRedirect("/404");
-//			});
-//		});
+		http.exceptionHandling(e -> {
+			e.accessDeniedHandler((request, response, exception) -> {
+				response.sendRedirect("/access_denied");
+			});
+		});
 
 		http.logout((logout) -> {
 			logout.logoutUrl("/logout").logoutSuccessUrl("/login").permitAll();

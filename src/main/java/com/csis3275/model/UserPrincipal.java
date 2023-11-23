@@ -14,14 +14,16 @@ public class UserPrincipal implements UserDetails {
 	private String password;
 	private long id;
 	private String displayName;
-	private String role;
+	private Role role;
+	private boolean enabled;
 
-	public UserPrincipal(long id, String displayName, String username, String password, String role) {
+	public UserPrincipal(long id, String displayName, String username, String password, Role role, boolean enabled) {
 		this.id = id;
 		this.displayName = displayName;
 		this.username = username;
 		this.password = password;
 		this.role = role;
+		this.enabled = enabled;
 	}
 	
 	
@@ -39,7 +41,6 @@ public class UserPrincipal implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
 		return this.username;
 	}
 
@@ -60,7 +61,7 @@ public class UserPrincipal implements UserDetails {
 
 	@Override
 	public boolean isEnabled() {
-		return true;
+		return this.enabled;
 	}
 	
 	public long getId() {
@@ -71,15 +72,15 @@ public class UserPrincipal implements UserDetails {
 		return this.displayName;
 	}
 	
-	public String getRole() {
+	public Role getRole() {
 		return this.role;
 	}
 	
 	public boolean isEmployer() {
-		return role == "EMPLOYER";
+		return this.role == Role.EMPLOYER;
 	}
 	
 	public boolean isFreelancer() {
-		return role == "FREELANCER";
+		return this.role == Role.FREELANCER;
 	}
 }

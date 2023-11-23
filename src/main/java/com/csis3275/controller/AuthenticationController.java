@@ -1,9 +1,5 @@
 package com.csis3275.controller;
 
-import org.springframework.security.web.savedrequest.SavedRequest;
-
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.csis3275.model.User;
@@ -28,11 +23,7 @@ public class AuthenticationController {
 	private UserService userDAO;
 
 	@GetMapping("/login")
-	public String login(Model model, @RequestParam("error") Optional<String> error) {
-
-		if (error.isPresent()) {
-			model.addAttribute("error", error.get());
-		}
+	public String login(Model model) {
 
 		model.addAttribute("user", new User());
 		return "login/login";

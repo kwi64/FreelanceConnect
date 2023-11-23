@@ -1,16 +1,14 @@
 package com.csis3275;
 
-import java.time.LocalDate;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.thymeleaf.spring6.SpringTemplateEngine;
 
 import com.csis3275.model.UserProfile;
 import com.csis3275.model.UserServiceImpl;
 
+import com.csis3275.model.Role;
 import com.csis3275.model.User;
 import com.csis3275.model.UserDAO;
 
@@ -31,8 +29,8 @@ public class FreelanceConnectApplication {
 	@Bean
 	CommandLineRunner seedUsers(UserDAO userDAO) {
 		return (args) -> {
-			userDAO.createUser(new User("Freelancer", "freelancer@connect.com", "password", "FREELANCER"));
-			userDAO.createUser(new User("Employer", "employer@connect.com", "password", "EMPLOYER"));
+			userDAO.createUser(new User("Freelancer", "freelancer@connect.com", "password", Role.FREELANCER, true));
+			userDAO.createUser(new User("Employer", "employer@connect.com", "password", Role.EMPLOYER, true));
 		};
 	}
 

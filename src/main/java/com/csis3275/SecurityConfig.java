@@ -1,37 +1,26 @@
 package com.csis3275;
 
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
-import org.springframework.security.authentication.AuthenticationEventPublisher;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.DefaultAuthenticationEventPublisher;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationFilter;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
+import org.springframework.web.servlet.FlashMap;
+import org.springframework.web.servlet.FlashMapManager;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
+import org.springframework.web.servlet.support.SessionFlashMapManager;
 
 import com.csis3275.model.AppUserDetailsService;
 
 @Configuration
-@EnableWebSecurity
 public class SecurityConfig {
 
 	private AppUserDetailsService appUserDetailsService;
@@ -40,12 +29,12 @@ public class SecurityConfig {
     }
 
 	@Bean
-	public PasswordEncoder passwordEncoder() {
+	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
 	@Bean
-	public SecurityFilterChain getSecurityFilterChain(HttpSecurity http, HandlerMappingIntrospector introspector)
+	SecurityFilterChain getSecurityFilterChain(HttpSecurity http, HandlerMappingIntrospector introspector)
 			throws Exception {
 		MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
 
@@ -72,10 +61,17 @@ public class SecurityConfig {
 		http.formLogin(l -> {
 			l.loginPage("/login").permitAll();
 			l.failureHandler((request, response, exception) -> {
+				
+				final FlashMap flashMap = new FlashMap();
+		        final FlashMapManager flashMapManager = new SessionFlashMapManager();
+
 				if (exception instanceof DisabledException) {
-					response.sendRedirect("/login?error=Sorry, your account is disabled!");
+			        flashMap.put("error", "Sorry, your account is disabled!");
+					response.sendRedirect("/login");
 				} else {
-					response.sendRedirect("/login?error=Email or password is wrong!");
+					flashMap.put("error", "Email or password is wrong!");
+					flashMapManager.saveOutputFlashMap(flashMap, request, response);
+					response.sendRedirect("/login");
 				}
 			});
 			l.successHandler((request, response, exception) -> {

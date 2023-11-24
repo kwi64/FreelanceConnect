@@ -1,6 +1,5 @@
 package com.csis3275.model;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,7 +18,7 @@ public class JobApplicationSkill {
 	private String name;
 	private String action;
 	
-	@ManyToOne(cascade = CascadeType.REMOVE)
+	@ManyToOne
 	@JoinColumn(name = "job_application_id")
     private JobApplication jobApplication;
 	
@@ -65,13 +64,4 @@ public class JobApplicationSkill {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-//	public Long getJobApplicationId() {
-//		return jobApplicationId;
-//	}
-//
-//	public void setJobApplicationId(Long jobApplicationId) {
-//		this.jobApplicationId = jobApplicationId;
-//	}
-	
 }

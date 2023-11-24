@@ -21,7 +21,7 @@ public class JobApplicationWorkExperience {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@ManyToOne(cascade = CascadeType.REMOVE)
+	@ManyToOne
 	@JoinColumn(name = "job_application_id")
 	private JobApplication jobApplication;
 	
@@ -125,12 +125,4 @@ public class JobApplicationWorkExperience {
 	public void setAction(String action) {
 		this.action = action;
 	}
-
-//	public Long getJobApplicationId() {
-//		return jobApplicationId;
-//	}
-//
-//	public void setJobApplicationId(Long jobApplicationId) {
-//		this.jobApplicationId = jobApplicationId;
-//	}
 }

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Insert title here</title>
+	<style th:fragment="style">
+		.job-posting {
+			text-decoration: inherit;
+			color: inherit;
+		}
+
+		.job-posting:hover {
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+<body>
+	<div th:fragment="container">
+
+		<div class="row">
+			<div class="col-md-4">
+				<th:block th:each="job: ${jobs}">
+					<a class="d-flex flex-column border p-2 mb-4 job-posting" th:href="@{'/freelancer/jobs/' + ${job.job.ID}}">
+						<div class="d-flex">
+							<h4 class="text-truncate" th:text="${job.job.title}"></h4>
+							<!--<h4 class="ms-3" style="color: #fd7e14;"><i class="fa-solid fa-bookmark float-end"></i></h4>-->
+						</div>
+						<h6 class="m-0" th:text="${job.job.employerTitle}"></h6>
+						<p class="m-0" th:text="${job.job.location}"></p>
+						<h6 class="m-0"><small>$[[${job.job.wage}]] / Hour</small></h6>
+						<p class="m-0"><small th:text="${job.postedOn}"></small></p>
+					</a>
+				</th:block>
+			</div>
+			<div class="col-md-8" th:if="${selected != null}">
+				<div class="border px-3 py-2">
+					<h3 th:text="${selected.job.title}">Senior Software Engineer</h3>
+					<h6 class="m-0" th:text="${selected.job.employerTitle}">EPASS Software</h6>
+					<p class="m-0" th:text="${selected.job.location}"></p>
+					<h6 class="m-0"><small>$[[${selected.job.wage}]] / Hour</small></h6>
+					<p class="m-0"><small th:text="${selected.postedOn}"></small></p>
+					<div class="row mb-4 mt-3">
+						<div class="col-12">
+							<a class="btn btn-success" th:href="@{'/freelancer/jobs/' + ${selected.job.ID} + '/apply'}">Apply Now</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<h3>Job Description</h3>
+							<hr>
+							<p th:utext="${selected.job.description}"></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script th:fragment="script">
+		
+	</script>
+</body>
+
+</html>

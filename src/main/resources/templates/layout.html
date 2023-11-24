@@ -88,12 +88,12 @@
 						<th:block sec:authorize="${#authentication.principal.isEmployer}">
 
 							<li class="nav-item w-100 border-bottom border-secondary" th:with="to='/employer/viewJob'">
-								<a th:class="${g_path == to} ? 'nav-link active' : 'nav-link'" th:href="@{${to}}">My Job
+								<a th:class="${g_path.contains(to)} ? 'nav-link active' : 'nav-link'" th:href="@{${to}}">My Job
 									Postings</a>
 							</li>
 							<li class="nav-item w-100 border-bottom border-secondary"
 								th:with="to='/employer/createJob'">
-								<a th:class="${g_path == to} ? 'nav-link active' : 'nav-link'" th:href="@{${to}}">New
+								<a th:class="${g_path.contains(to)} ? 'nav-link active' : 'nav-link'" th:href="@{${to}}">New
 									Job Posting</a>
 							</li>
 
@@ -101,9 +101,14 @@
 
 						<th:block sec:authorize="${#authentication.principal.isFreelancer}">
 
+
+							<li class="nav-item w-100 border-bottom border-secondary"
+								th:with="to='/freelancer/jobs'">
+								<a th:class="${g_path.contains(to)} ? 'nav-link active' : 'nav-link'" th:href="@{${to}}">Job Postings</a>
+							</li>
 							<li class="nav-item w-100 border-bottom border-secondary"
 								th:with="to='/freelancer/manage-profile'">
-								<a th:class="${g_path == to} ? 'nav-link active' : 'nav-link'" th:href="@{${to}}">My
+								<a th:class="${g_path.contains(to)} ? 'nav-link active' : 'nav-link'" th:href="@{${to}}">My
 									Profile</a>
 							</li>
 
@@ -111,7 +116,7 @@
 					</ul>
 				</div>
 			</div>
-			<div class="container-fluid overflow-auto pt-2">
+			<div class="container-fluid overflow-auto pt-2 position-relative">
 				<th:block th:if="${view != null}">
 					<th:block th:include="${view} :: container" />
 				</th:block>

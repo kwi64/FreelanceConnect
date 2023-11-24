@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.csis3275.model.User;
+import com.csis3275.model.UserPrincipal;
 import com.csis3275.model.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -71,7 +72,14 @@ public class AuthenticationController {
 
 	@GetMapping("/")
 	public String dashboard(Model model) {
-
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserPrincipal principal = (UserPrincipal)auth.getPrincipal();
+		
+		if(principal.isFreelancer()) {
+			return "redirect:/freelancer/jobs";
+		}
+		
 		model.addAttribute("view", "dashboard/dashboard");
 		model.addAttribute("script", true);
 		return "layout";

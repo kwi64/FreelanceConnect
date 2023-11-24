@@ -12,7 +12,7 @@
 	<div th:fragment="container">
 		<div class="row">
 			<div class="col-5">
-				<form class="col-6" action="#" id="myform" th:action="@{/add-info}" th:object="${createInfo}" method="POST">
+				<form class="col-6" action="#" id="myform" th:action="@{/freelancer/add-info}" th:object="${createInfo}" method="POST">
 					<div class="mb-3" >
 						<label for="id" class="form-label small m-0">Your Account Id Is:</label>
 						<input th:field="${createInfo.id}" th:value="${createInfo.id}" readonly style='width: 200px; height: 30px;'></input>

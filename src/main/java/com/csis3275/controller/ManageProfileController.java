@@ -21,9 +21,9 @@ public class ManageProfileController {
 	private UserServiceImpl userService;
 	
 	
-	@GetMapping("/manage-profile") 
+	@GetMapping("/freelancer/manage-profile") 
 	public String manageProfile(Model model) {
-		model.addAttribute("view", "profile/manage_profile");
+		model.addAttribute("view", "freelancer/profile/manage_profile");
 		model.addAttribute("userProfile", userService.getUserProfileInfo((long) 1));
 		/*
 		String email = "", password = "", name = "";
@@ -40,24 +40,24 @@ public class ManageProfileController {
 		return "layout";
 	}
 	
-	@GetMapping("/delete-profile")
+	@GetMapping("/freelancer/delete-profile")
 	public String deleteUser(@RequestParam("deleteuser") String id)	{
 		userService.deleteUser(Long.parseLong(id));
 		return "redirect:/login";	
 	}
 	
-	@GetMapping("/add-info")
+	@GetMapping("/freelancer/add-info")
 	public String addInfo(@RequestParam("id") Long id, Model model) {
-		model.addAttribute("view", "profile/add_info");
+		model.addAttribute("view", "freelancer/profile/add_info");
 		model.addAttribute("script", true);
 		model.addAttribute("createInfo", userService.getUserProfileInfo(id));
 		return "layout";
 	}
 	
-	@PostMapping("/add-info")
+	@PostMapping("/freelancer/add-info")
 	public String addInfo(UserProfile newInfo) {
 		userService.updateInfo(newInfo);
-		return "redirect:/manage-profile";
+		return "redirect:/freelancer/manage-profile";
 	}
 	
 	

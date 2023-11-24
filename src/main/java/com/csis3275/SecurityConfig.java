@@ -50,7 +50,7 @@ public class SecurityConfig {
 			auth.requestMatchers(mvcMatcherBuilder.pattern("/css/**"), mvcMatcherBuilder.pattern("/img/**"),
 					mvcMatcherBuilder.pattern("/js/**"), mvcMatcherBuilder.pattern("/webfonts/**")).permitAll();
 			auth.requestMatchers(PathRequest.toH2Console()).permitAll();
-			auth.requestMatchers(mvcMatcherBuilder.pattern("/login"), mvcMatcherBuilder.pattern("/register"))
+			auth.requestMatchers(mvcMatcherBuilder.pattern("/login"), mvcMatcherBuilder.pattern("/register"), mvcMatcherBuilder.pattern("/error"))
 					.permitAll();
 			auth.requestMatchers(mvcMatcherBuilder.pattern("/freelancer/**")).hasRole("FREELANCER");
 			auth.requestMatchers(mvcMatcherBuilder.pattern("/employer/**")).hasRole("EMPLOYER");

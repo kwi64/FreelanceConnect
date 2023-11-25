@@ -7,6 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -38,8 +39,8 @@ public class ManageProfileController {
 		return "redirect:/login";	
 	}
 	
-	@GetMapping("/freelancer/add-info")
-	public String addInfo(@RequestParam("id") Long id, Model model) {
+	@GetMapping("/freelancer/add-info/{id}")
+	public String addInfo(@PathVariable(required = true) Long id, Model model) {
 		model.addAttribute("view", "freelancer/profile/add_info");
 		model.addAttribute("script", true);
 		model.addAttribute("createInfo", userService.getUserProfileInfo(id));
@@ -47,8 +48,8 @@ public class ManageProfileController {
 		return "layout";
 	}
 	
-	@PostMapping("/freelancer/add-info")
-	public String addInfo(UserProfile newInfo) {
+	@PostMapping("/freelancer/add-info/{id}")
+	public String addInfo(@PathVariable(required = true) Long id, UserProfile newInfo) {
 		userService.updateInfo(newInfo);
 		//userService2.updateInfo(newInfo);
 		return "redirect:/freelancer/manage-profile";

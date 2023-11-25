@@ -2,14 +2,21 @@ package com.csis3275;
 
 import java.time.LocalDate;
 
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 import com.csis3275.model.UserProfile;
 import com.csis3275.model.UserService;
 import com.csis3275.model.UserServiceImpl;
+import com.csis3275.model.IUserProfile;
+import com.csis3275.model.IUserRepository;
 import com.csis3275.model.Job;
 import com.csis3275.model.JobApplication;
 import com.csis3275.model.JobApplicationService;
@@ -24,26 +31,32 @@ import com.csis3275.model.User;
 
 @SpringBootApplication
 public class FreelanceConnectApplication {
-
+	
+	
 	public static void main(String[] args) {
+		ConfigurableApplicationContext configurableApplicationContext = 
 		SpringApplication.run(FreelanceConnectApplication.class, args);
+		
+		IUserRepository userProfileRepository = configurableApplicationContext.getBean(IUserProfile.class);
+		UserService userDAO = configurableApplicationContext.getBean(UserService.class);
+		
+		User user1 = userDAO.createUser(new UserProfile("Freelancer", "freelancer@connect.com", "password", Role.FREELANCER, true,null,null,null,null,null,null,null,null,null,null));
+		User user2 = userDAO.createUser(new UserProfile("Employer", "employer@connect.com", "password", Role.EMPLOYER, true,null,null,null,null,null,null,null,null,null,null));
+		userProfileRepository.save(user1);
+		userProfileRepository.save(user2);
+		
 	}
 	
-	@Bean
-	CommandLineRunner demo(UserServiceImpl repository)	{
-		return (args) -> {
-			repository.createProfile(new UserProfile("Jack Braun", "JackBraun@douglascollege.ca", "123456", true, null, null, null, null, null, null, null, null, null, null));
-		};
-	}
 	
-	@Bean
-	CommandLineRunner seedUsers(UserService userDAO) {
-		return (args) -> {
-			userDAO.createUser(new User("Freelancer", "freelancer@connect.com", "password", Role.FREELANCER, true));
-			userDAO.createUser(new User("Employer", "employer@connect.com", "password", Role.EMPLOYER, true));
-		};
-	}
-	
+	//@Bean
+	//CommandLineRunner seedUsers(UserService userDAO) {
+	//	return (args) -> {
+	//   	Replaced this part and placed in main
+	//		userDAO.createUser(new User("Freelancer", "freelancer@connect.com", "password", Role.FREELANCER, true));
+	//		userDAO.createUser(new User("Employer", "employer@connect.com", "password", Role.EMPLOYER, true));
+	//	};
+	//}
+
 	@Bean
 	CommandLineRunner seedJobs(JobService jobService) {
 		return (args) -> {

@@ -15,12 +15,12 @@ public class UserServiceImpl {
 		return userProfileRepo.save(newUser);
 	}
 	
-	public List<UserProfile> readUsers()	{
+	/*public List<UserProfile> readUsers()	{
 		return (List<UserProfile>)userProfileRepo.findAll();
-	}
+	}*/
 	
 	public UserProfile getUserProfileInfo(Long id) {
-		return userProfileRepo.findById(id).orElse(new UserProfile());
+		return (UserProfile) userProfileRepo.findById(id).orElse(new UserProfile());
 	}
 	
 	public void deleteUser(Long id) {
@@ -28,7 +28,7 @@ public class UserServiceImpl {
 	}
 	
 	public void updateInfo(UserProfile updatedUser) {
-		updatedUser.setIsFreelancer(true);
+		//updatedUser.setIsFreelancer(true);
 		userProfileRepo.save(updatedUser);
 	}
 }

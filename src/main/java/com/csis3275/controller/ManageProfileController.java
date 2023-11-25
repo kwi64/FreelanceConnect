@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.csis3275.model.UserPrincipal;
 import com.csis3275.model.UserProfile;
+import com.csis3275.model.UserService;
 import com.csis3275.model.UserServiceImpl;
 
 @Controller
@@ -19,24 +20,14 @@ public class ManageProfileController {
 
 	@Autowired
 	private UserServiceImpl userService;
-	
+	@Autowired
+	private UserService userService2;
 	
 	@GetMapping("/freelancer/manage-profile") 
 	public String manageProfile(Model model) {
 		model.addAttribute("view", "freelancer/profile/manage_profile");
-		model.addAttribute("userProfile", userService.getUserProfileInfo((long) 1));
-		/*
-		String email = "", password = "", name = "";
-		Boolean isFreelancer = true;
-		Authentication auth = (Authentication) SecurityContextHolder.getContext().getAuthentication();
-		if (auth!=null) {
-			UserPrincipal user = (UserPrincipal)((org.springframework.security.core.Authentication) auth).getPrincipal();
-			 email = user.getUsername();
-			 password = user.getPassword();
-			 isFreelancer = user.isFreelancer();
-			 name = user.getDisplayName();
-		}
-		*/
+		model.addAttribute("userProfileInfo", userService.getUserProfileInfo((long) 1));
+		model.addAttribute("user", userService2.getUserInfo((long) 1));
 		return "layout";
 	}
 	
@@ -51,6 +42,7 @@ public class ManageProfileController {
 		model.addAttribute("view", "freelancer/profile/add_info");
 		model.addAttribute("script", true);
 		model.addAttribute("createInfo", userService.getUserProfileInfo(id));
+		//model.addAttribute("updateUser" , userService2.getUserInfo(id));
 		return "layout";
 	}
 	

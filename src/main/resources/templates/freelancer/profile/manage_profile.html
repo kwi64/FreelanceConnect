@@ -10,45 +10,47 @@
 			<div class="col-4">
 				<h4>Manage Profile</h4>
 				<div class="field mb-2">
-					<tr th:each="user: ${userProfile}">
-						<td><a th:href="@{'/freelancer/delete-profile?deleteuser=' + ${user.id}}" class="btn btn-warning">Delete Profile</a></td>
-						<td><a th:href="@{'/freelancer/add-info?id=' + ${user.id}}" class="btn btn-warning">Edit Profile</a></td>
+					<tr th:each="user: ${userProfileInfo}">
+						<td><a th:href="@{'/freelancer/profile/delete-profile?deleteuser=' + ${user.id}}" class="btn btn-warning">Delete Profile</a></td>
+						<td><a th:href="@{'/freelancer/profile/add-info?id=' + ${user.id}}" class="btn btn-warning">Edit Profile</a></td>
 					</tr>
 				</div>
 			</div>
 			<div class="col-6">
 				<h4>Your current information</h4>
 				<div class="field mb-2">
-					<tr th:each="user: ${userProfile}">
+					<tr th:each="user: ${user}">
 						<td>Name:</td>
 						<td th:text="${user.name}"></td>
 						<br>
 						<td>Email:</td>
-						<td th:text="${user.email}"></td>
+						<td th:text="${user.username}"></td>
 						<br>
+					</tr>
+					<tr th:each="userInfo: ${userProfileInfo}">
 						<td>Address 1:</td>
-						<td th:text="${user.address1}"></td>
+						<td th:text="${userInfo.address1}"></td>
 						<br>
 						<td>Address 2:</td>
-						<td th:text="${user.address2}"></td>
+						<td th:text="${userInfo.address2}"></td>
 						<br>
 						<td>City:</td>
-						<td th:text="${user.city}"></td>
+						<td th:text="${userInfo.city}"></td>
 						<br>
 						<td>Province:</td>
-						<td th:text="${user.province}"></td>
+						<td th:text="${userInfo.province}"></td>
 						<br>
 						<td>Previous Company:</td>
-						<td th:text="${user.company}"></td>
+						<td th:text="${userInfo.company}"></td>
 						<br>
 						<td>Previous Job Title:</td>
-						<td th:text="${user.title}"></td>
+						<td th:text="${userInfo.title}"></td>
 						<br>
 						<td>Country:</td>
-						<td th:text="${user.country}"></td>
+						<td th:text="${userInfo.country}"></td>
 						<br>
 						<td>Skills:</td>
-						<td th:text="${user.skills}"></td>
+						<td th:text="${userInfo.skills}"></td>
 					</tr>
 				</div>
 			</div>

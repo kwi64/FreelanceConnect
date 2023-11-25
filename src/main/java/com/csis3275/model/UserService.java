@@ -12,6 +12,9 @@ public class UserService {
 	@Autowired
 	private IUserRepository repository;
 	
+	public User getUserInfo(Long id) {
+		return (UserProfile) repository.findById(id).orElse(new UserProfile());
+	}
 	
 	public User createUser(User user) {
 		user.setUsername(user.getUsername().trim());

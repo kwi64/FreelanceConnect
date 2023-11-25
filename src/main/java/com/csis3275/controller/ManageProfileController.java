@@ -26,6 +26,7 @@ public class ManageProfileController {
 	@GetMapping("/freelancer/manage-profile") 
 	public String manageProfile(Model model) {
 		model.addAttribute("view", "freelancer/profile/manage_profile");
+		//still hard coded must change soon
 		model.addAttribute("userProfileInfo", userService.getUserProfileInfo((long) 1));
 		model.addAttribute("user", userService2.getUserInfo((long) 1));
 		return "layout";
@@ -42,13 +43,14 @@ public class ManageProfileController {
 		model.addAttribute("view", "freelancer/profile/add_info");
 		model.addAttribute("script", true);
 		model.addAttribute("createInfo", userService.getUserProfileInfo(id));
-		//model.addAttribute("updateUser" , userService2.getUserInfo(id));
+		model.addAttribute("updateUser" , userService2.getUserInfo(id));
 		return "layout";
 	}
 	
 	@PostMapping("/freelancer/add-info")
 	public String addInfo(UserProfile newInfo) {
 		userService.updateInfo(newInfo);
+		//userService2.updateInfo(newInfo);
 		return "redirect:/freelancer/manage-profile";
 	}
 	

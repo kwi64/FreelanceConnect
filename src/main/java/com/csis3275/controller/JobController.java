@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import com.csis3275.model.Job;
+import com.csis3275.model.JobApplicationService;
 import com.csis3275.model.JobService;
 
 
@@ -16,6 +17,7 @@ public class JobController {
 
 	@Autowired
 	private JobService jobService;
+	
 	private ArrayList<Job> jobList = new ArrayList<Job>();
 	
 	@GetMapping("/employer/viewJob")
@@ -55,9 +57,10 @@ public class JobController {
 	}
 	
 	@GetMapping("/employer/viewApplication")
-	public String viewApplication(@RequestParam("ID") Long ID,Model model)	{
+	public String viewApplication( Long ID,  Model model)	{
 		model.addAttribute("view", "employer/viewApplication/viewApplication");
 		model.addAttribute("viewJob", jobService.viewApplications((Long) ID));
+		model.addAttribute("viewApplication", jobService.listJobApplications((Long) ID));
 		return "layout";
 	}
 }

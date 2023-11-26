@@ -35,6 +35,7 @@ public class UserService {
 		user.setUsername(user.getUsername().trim());
 		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
 		user.setEnabled(true);
+		
 		return repository.save(user);
 	}
 	

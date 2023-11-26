@@ -33,4 +33,8 @@ public class JobApplicationService {
 		
 		return ja;
 	}
+	
+	public void rejectJobApplication(Long id) {
+		repository.deleteById(id);
+	}
 }

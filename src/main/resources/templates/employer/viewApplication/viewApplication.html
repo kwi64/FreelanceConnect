@@ -25,8 +25,8 @@
 			<tr th:each="jobApplication: ${viewApplication}">
 				<td th:text="${jobApplication.name}" />
 				<td th:text="${jobApplication.country}" />
-				<td><a th:href="@{'/employer/viewApplication?ID=' + ${jobApplication.id}}" class="btn" style="background-color: gray;">View Applications</a></td>
-				<td><a th:href="@{'/employer/viewApplication?ID=' + ${jobApplication.id}}" class="btn" style="background-color: red;">Delete Applications</a></td>
+				<td><a th:href="@{'/employer/viewApplicationsOfJob?id=' + ${jobApplication.id}}" class="btn" style="background-color: gray;">View Applications</a></td>
+				<td><a th:href="@{'/employer/rejectApplication?id=' + ${jobApplication.id}}" class="btn" style="background-color: red;">Delete Application</a></td>
 			</tr>
     	</table>
     </div>

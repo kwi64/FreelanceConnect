@@ -18,6 +18,9 @@ public class JobController {
 	@Autowired
 	private JobService jobService;
 	
+	@Autowired
+	private JobApplicationService jobApplicationService;
+	
 	private ArrayList<Job> jobList = new ArrayList<Job>();
 	
 	@GetMapping("/employer/viewJob")
@@ -62,5 +65,19 @@ public class JobController {
 		model.addAttribute("viewJob", jobService.viewApplications((Long) ID));
 		model.addAttribute("viewApplication", jobService.listJobApplications((Long) ID));
 		return "layout";
+	}
+	
+	@GetMapping("/employer/viewApplicationsOfJob")
+	public String viewApplicationsOfJob(Long id, Model model) {
+		model.addAttribute("view", "employer/viewApplicationsOfJob/viewApplicationsOfJob");
+		model.addAttribute("viewApplication", jobApplicationService.getJobApplication((Long) id));
+		return "layout";
+	}
+	
+	@GetMapping("/employer/rejectApplication")
+	public String rejectApplication(Long id, Model model) {
+		model.addAttribute("view", "employer/viewApplicationsOfJob/viewApplicationsOfJob");
+		jobApplicationService.rejectJobApplication(id);
+		return "redirect:/employer/viewJob";
 	}
 }

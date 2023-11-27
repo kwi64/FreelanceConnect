@@ -34,3 +34,4 @@ build/
 
 ### ignore application.properties
 application.properties
+uploads/**

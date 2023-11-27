@@ -29,6 +29,7 @@ public class JobApplication {
 	private String city;
 	private String province;
 	private String country;
+	private String resumeFileName;
 	private String resumePath;
 	private String coverLetter;
 	private JobApplicationStatus applicationStatus;
@@ -172,6 +173,14 @@ public class JobApplication {
 
 	public void setApplicationStatus(JobApplicationStatus applicationStatus) {
 		this.applicationStatus = applicationStatus;
+	}
+
+	public String getResumeFileName() {
+		return resumeFileName;
+	}
+
+	public void setResumeFileName(String resumeFileName) {
+		this.resumeFileName = resumeFileName;
 	}
 	
 }

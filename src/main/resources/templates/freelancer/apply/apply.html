@@ -18,41 +18,45 @@
 				<h4>Personal Information</h4>
 				<div class="field mb-2">
 					<label for="name" class="form-label small m-0">Full Name</label>
-					<input type="text" th:field="*{name}" class="form-control form-control-sm" id="name">
+					<input type="text" th:field="*{name}" class="form-control form-control-sm" id="name"
+						th:disabled="${canApply == false}">
 					<th:block th:if="${errors?.containsKey('name')}">
 						<label class="error" th:text="${errors?.name}"></label>
 					</th:block>
 				</div>
 				<div class="field mb-2">
 					<label for="addressLine1" class="form-label small m-0">Address Line 1</label>
-					<input type="text" th:field="*{addressLine1}" class="form-control form-control-sm"
-						id="addressLine1">
+					<input type="text" th:field="*{addressLine1}" class="form-control form-control-sm" id="addressLine1"
+						th:disabled="${canApply == false}">
 					<th:block th:if="${errors?.containsKey('addressLine1')}">
 						<label class="error" th:text="${errors?.addressLine1}"></label>
 					</th:block>
 				</div>
 				<div class="field mb-2">
 					<label for="addressLine2" class="form-label small m-0">Address Line 2</label>
-					<input type="text" th:field="*{addressLine2}" class="form-control form-control-sm"
-						id="addressLine2">
+					<input type="text" th:field="*{addressLine2}" class="form-control form-control-sm" id="addressLine2"
+						th:disabled="${canApply == false}">
 				</div>
 				<div class="field mb-2">
 					<label for="city" class="form-label small m-0">City</label>
-					<input type="text" th:field="*{city}" class="form-control form-control-sm" id="city">
+					<input type="text" th:field="*{city}" class="form-control form-control-sm" id="city"
+						th:disabled="${canApply == false}">
 					<th:block th:if="${errors?.containsKey('city')}">
 						<label class="error" th:text="${errors?.city}"></label>
 					</th:block>
 				</div>
 				<div class="field mb-2">
 					<label for="province" class="form-label small m-0">Province</label>
-					<input type="text" th:field="*{province}" class="form-control form-control-sm" id="province">
+					<input type="text" th:field="*{province}" class="form-control form-control-sm" id="province"
+						th:disabled="${canApply == false}">
 					<th:block th:if="${errors?.containsKey('province')}">
 						<label class="error" th:text="${errors?.province}"></label>
 					</th:block>
 				</div>
 				<div class="field mb-2">
 					<label for="country" class="form-label small m-0">Country</label>
-					<input type="text" th:field="*{country}" class="form-control form-control-sm" id="country">
+					<input type="text" th:field="*{country}" class="form-control form-control-sm" id="country"
+						th:disabled="${canApply == false}">
 					<th:block th:if="${errors?.containsKey('country')}">
 						<label class="error" th:text="${errors?.country}"></label>
 					</th:block>
@@ -70,7 +74,8 @@
 							<input type="text" th:value="${workExperience.title}"
 								th:name="'workExperienceList['+ ${stat.index} + '].title'"
 								class="form-control form-control-sm"
-								th:id="'workExperienceList['+ ${stat.index} + '].title'">
+								th:id="'workExperienceList['+ ${stat.index} + '].title'"
+								th:disabled="${canApply == false}">
 							<th:block th:if="${errors?.containsKey(key)}">
 								<label class="error" th:text="${errors[__${key}__]}"></label>
 							</th:block>
@@ -81,7 +86,8 @@
 							<input type="text" th:value="${workExperience.company}"
 								th:name="'workExperienceList['+ ${stat.index} + '].company'"
 								class="form-control form-control-sm"
-								th:id="'workExperienceList['+ ${stat.index} + '].company'">
+								th:id="'workExperienceList['+ ${stat.index} + '].company'"
+								th:disabled="${canApply == false}">
 							<th:block th:if="${errors?.containsKey(key)}">
 								<label class="error" th:text="${errors[__${key}__]}"></label>
 							</th:block>
@@ -92,7 +98,8 @@
 							<input type="text" th:value="${workExperience.location}"
 								th:name="'workExperienceList['+ ${stat.index} + '].location'"
 								class="form-control form-control-sm"
-								th:id="'workExperienceList['+ ${stat.index} + '].location'">
+								th:id="'workExperienceList['+ ${stat.index} + '].location'"
+								th:disabled="${canApply == false}">
 							<th:block th:if="${errors?.containsKey(key)}">
 								<label class="error" th:text="${errors[__${key}__]}"></label>
 							</th:block>
@@ -104,18 +111,20 @@
 							<div class="input-group input-group-sm">
 								<label th:for="'workExperienceList['+ ${stat.index} + '].fromDate'"
 									class="input-group-text">From</label>
-								<input type="text" th:value="${workExperience.fromDate}"
+								<input type="date" th:value="${workExperience.fromDate}" pattern="\d{4}-\d{2}-\d{2}"
 									th:name="'workExperienceList['+ ${stat.index} + '].fromDate'"
 									class="form-control datepicker"
-									id="'workExperienceList['+ ${stat.index} + '].fromDate'">
+									id="'workExperienceList['+ ${stat.index} + '].fromDate'"
+									th:disabled="${canApply == false}">
 								<label th:for="'workExperienceList['+ ${stat.index} + '].toDate'"
 									class="input-group-text toDate"
 									th:class="${workExperience.currentlyWorking} ? 'input-group-text d-none toDate': 'input-group-text toDate'">To</label>
-								<input type="text" th:value="${workExperience.toDate}"
+								<input type="date" th:value="${workExperience.toDate}"
 									th:name="'workExperienceList['+ ${stat.index} + '].toDate'"
 									class="form-control toDate"
 									th:class="${workExperience.currentlyWorking} ? 'form-control datepicker d-none toDate': 'form-control datepicker toDate'"
-									id="'workExperienceList['+ ${stat.index} + '].toDate'">
+									id="'workExperienceList['+ ${stat.index} + '].toDate'"
+									th:disabled="${canApply == false}" pattern="\d{4}-\d{2}-\d{2}">
 							</div>
 							<th:block th:if="${errors?.containsKey(key_one)}">
 								<label class="error" th:text="${errors[__${key_one}__]}"></label>
@@ -130,7 +139,8 @@
 								<input type="checkbox" th:checked="${workExperience.currentlyWorking}"
 									th:name="'workExperienceList['+ ${stat.index} + '].currentlyWorking'"
 									class="form-check-input currentlyWorking"
-									th:id="'workExperienceList['+ ${stat.index} + '].currentlyWorking'">
+									th:id="'workExperienceList['+ ${stat.index} + '].currentlyWorking'"
+									th:disabled="${canApply == false}">
 								<label class="form-check-label small"
 									th:for="'workExperienceList['+ ${stat.index} + '].currentlyWorking'">I currently
 									work here</label>
@@ -159,7 +169,7 @@
 					<div class="field mb-2" th:with="key='workExperienceList_'+ ${stat.index} + '_name'">
 						<div class="input-group input-group-sm">
 							<input type="text" th:value="${skill.name}" th:name="'skillList['+ ${stat.index} + '].name'"
-								class="form-control">
+								class="form-control" th:disabled="${canApply == false}">
 							<th:block th:if="${canApply == true}">
 								<button type="submit" class="btn btn-danger" value="delete"
 									th:name="'skillList['+ ${stat.index} + '].action'"><i
@@ -204,9 +214,6 @@
 
 
 	<script th:fragment="script">
-
-		$(".datepicker").datepicker({dateFormat: 'yy-mm-dd'});
-
 		$(document).on("change", ".currentlyWorking", function () {
 			$(this).closest(".experience").find(".toDate").toggleClass("d-none");
 		});

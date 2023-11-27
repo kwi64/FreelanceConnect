@@ -12,7 +12,8 @@
 	<div th:fragment="container">
 		<div class="row">
 			<div class="col-5">
-				<form class="col-6" action="#" id="myform" th:action="@{/add-info}" th:object="${createInfo}" method="POST">
+				<!--action="#" th:action="@{'/freelancer/add-info/'+{createInfo.id}}"-->
+				<form class="col-6" id="myform" action="" th:object="${createInfo}" method="POST">
 					<div class="mb-3" >
 						<label for="id" class="form-label small m-0">Your Account Id Is:</label>
 						<input th:field="${createInfo.id}" th:value="${createInfo.id}" readonly style='width: 200px; height: 30px;'></input>
@@ -38,19 +39,7 @@
 						<label for="country" class="form-label small m-0">Country</label>
 						<input type="text" style='width: 200px; height: 30px;' name="country" class="form-control form-control-sm" id="country" th:field="${createInfo.country}">
 					</div>
-					<h4>Account Info</h4>
-					<div class="mb-3" >
-						<label for="name" class="form-label small m-0">Name</label>
-						<input type="text" th:field="${createInfo.name}" th:value="${createInfo.name}" style='width: 200px; height: 30px;' name="name" class="form-control form-control-sm" id="name">
-					</div>
-					<div class="mb-3">
-						<label for="email" class="form-label small m-0">Email address</label>
-						<input type="text" th:field="${createInfo.email}" th:value="${createInfo.email}" style='width: 200px; height: 30px;' name="email" class="form-control form-control-sm" id="email">
-					</div>
-					<div class="mb-3">
-						<label for="password" class="form-label small m-0">Password</label>
-						<input type="password" th:field="${createInfo.password}" style='width: 200px; height: 30px;' class="form-control form-control-sm" id="password" autocomplete="new-password">
-					</div>
+					<!--
 					<h4>Work Experience</h4>
 					<div class="mb-3">
 						<label for="title" class="form-label small m-0">Title</label>
@@ -68,6 +57,7 @@
 						<label for="quitDate" class="form-label small m-0">Date of Departure</label>
 						<input type="date" style='width: 200px; height: 30px;'name="quitDate" class="form-control form-control-sm" id="quitDate" th:field="${createInfo.dateOfQuit}"/>
 					</div>
+					-->
 					<h4>Skills</h4>
 					<div class="mb-3">
 						<label for="skills" style='width: 200px; height: 30px;' class="form-label small m-0">Please enter any skills you would like potential employers to know</label>
@@ -75,18 +65,37 @@
 					</div>
 					<button type="submit" style='width: 200px; height: 45px;' class="btn btn-primary">Submit</button>
 					</td>
-					</fieldset>
+				</form>
+				<form class="col-6" action="" id="myform2" th:object="${updateUser}" method="POST">
+				<h4>Account Info</h4>	
+					<div class="mb-3" >
+						<!--
+						<input type="hidden" th:field="{updateUser.id}"/>
+						-->
+						<label for="name" class="form-label small m-0">Name</label>
+						<input type="text" th:field="${updateUser.name}" th:value="${updateUser.name}" style='width: 200px; height: 30px;' name="name" class="form-control form-control-sm" id="name">
+					</div>
+					<div class="mb-3">
+						<label for="email" class="form-label small m-0">Email address</label>
+						<input type="text" th:field="${updateUser.username}" th:value="${updateUser.username}" style='width: 200px; height: 30px;' name="email" class="form-control form-control-sm" id="email">
+					</div>
+					<div class="mb-3">
+						<label for="password" class="form-label small m-0">Password</label>
+						<input type="password" th:field="${updateUser.password}" style='width: 200px; height: 30px;' class="form-control form-control-sm" id="password" autocomplete="new-password">
+					</div>
+					<button type="submit" style='width: 200px; height: 45px;' class="btn btn-primary">Submit</button>
+					<!--<a type="button" th:href="@{|/freelancer/add-info/${updateUser.id}|}" style='width: 200px; height: 45px;' class="btn btn-primary">Submit</a>-->
 				</form>
 			</div>
 		</div>
 	</div>
 	<script th:fragment="script">
-		$("#myform").validate({
+		$("#myform2").validate({
 			rules: {
 				name: {
 					required: true
 				},
-				email: {
+				username: {
 					required: true,
 					email: true
 				},
@@ -97,7 +106,7 @@
 			},
 			messages: {
 				name: "Please specify your name",
-				email: {
+				username: {
 					required: "Email address is needed.",
 					email: "Email address must be in the format of name@domain.com"
 				},

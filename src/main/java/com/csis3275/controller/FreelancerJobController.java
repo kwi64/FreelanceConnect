@@ -191,7 +191,9 @@ public class FreelancerJobController {
 		}
 
 		if (submittedViaEnter == true && (application.getAction() == null || application.getAction().equals("save"))) {
-			attributes.addFlashAttribute("success", "Successfully Saved!");
+			if(errors.size() == 0) {
+				attributes.addFlashAttribute("success", "Successfully Saved!");
+			}
 		}
 
 		if (application.getAction() != null && application.getAction().equals("next")) {

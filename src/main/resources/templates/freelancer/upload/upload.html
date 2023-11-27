@@ -20,9 +20,11 @@
 						<div class="field mb-2">
 							<label>File types accepted .pdf, .docx</label>
 							<div class="input-group input-group-sm">
-								<label class="btn btn-outline-secondary" for="file">Upload</label>
-								<input class="form-control d-none" type="file" name="file" id="file" accept=".pdf,.docx"
-									onchange="onFileSelect(event)">
+								<th:block th:if="${canApply == true}">
+									<label class="btn btn-outline-secondary" for="file">Upload</label>
+									<input class="form-control d-none" type="file" name="file" id="file"
+										accept=".pdf, .docx" onchange="onFileSelect(event)">
+								</th:block>
 								<input th:field="*{resumeFileName}" id="resumeFileName"
 									class="form-control input-group-text text-start" disabled />
 							</div>
@@ -61,6 +63,11 @@
 		</form>
 	</div>
 
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		var readonly = /*[[${canApply == true ? false: true}]]*/ false;
+	/*]]>*/
+	</script>
 	<script th:fragment="script">
 
 		$("#form").validate({
@@ -73,10 +80,12 @@
 					required: function (element) {
 						return $("#resumeFileName").val().trim().length == 0
 					},
-					accept: "pdf,docx"
+					accept: "application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
 				},
 				coverLetter: {
 					required: function (element) {
+						console.log(tinymce.get("coverLetter").getContent());
+						console.log(tinymce.get("coverLetter").getContent().length);
 						return tinymce.get("coverLetter").getContent().length == 0;
 					}
 				}
@@ -84,7 +93,7 @@
 			messages: {
 				file: {
 					required: "Please upload a resume",
-					accept: "Only .pdf, .docx files are accepted"
+					accept: "File not supported"
 				},
 				coverLetter: {
 					required: "Please write a cover letter!"
@@ -99,7 +108,8 @@
 
 		tinymce.init({
 			selector: '#coverLetter',
-			removed_menuitems: 'print'
+			removed_menuitems: 'print',
+			readonly: readonly
 		});
 
 

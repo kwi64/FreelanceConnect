@@ -32,3 +32,32 @@ form label.success{
 form.field:has(> label.error) {
 	margin-bottom: 0 !important;
 }
+
+.form-footer{
+	display: flex !important;
+	bottom: 0;
+    z-index: 1020;
+	position: -webkit-sticky;
+    position: sticky;
+    align-self: flex-end !important;
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+    border-top: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+    justify-content: space-between !important;
+}
+
+.form-footer .messages{
+	display: flex !important;
+	flex-direction: row !important;
+}
+
+.form-footer label.success, .form-footer label.error{
+	font-size: 10pt;
+	position: relative;
+	top: 0;
+	width: 100%;
+	white-space: nowrap;
+	margin-right: 12px;
+}

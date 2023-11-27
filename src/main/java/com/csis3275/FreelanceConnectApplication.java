@@ -73,7 +73,7 @@ public class FreelanceConnectApplication {
 	@Bean
 	CommandLineRunner seedJobApplications(JobApplicationService jobApplicationService, JobApplicationWorkExperienceService experienceService, JobApplicationSkillService skillService) {
 		return (args) -> {
-			JobApplication ja1 = new JobApplication(1, 1, "Freelancer Full Name", "addrL1", "addrL2", "New West", "BC", "CA", JobApplicationStatus.SUBMITTED); 
+			JobApplication ja1 = new JobApplication(1, 1, "Freelancer Full Name", "addrL1", "addrL2", "New West", "BC", "CA", null); 
 			JobApplication ja2 = new JobApplication(1, 2, "Freelancer Full Name", "addrL1", "addrL2", "New West", "BC", "CA", JobApplicationStatus.INPROGRESS);
 			
 			jobApplicationService.createJobApplication(ja1);

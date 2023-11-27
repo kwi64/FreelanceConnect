@@ -12,7 +12,7 @@
 	<link href="/css/layout.css" rel="stylesheet">
 	
 	<th:block th:if="${style != null && style}">
-		<th:block th:replace="${view} :: style" />
+		<th:block th:replace="~{${view} :: style}" />
 	</th:block>
 
 	<script src="/js/jquery-3.7.1.min.js"></script>
@@ -118,7 +118,7 @@
 			</div>
 			<div class="container-fluid overflow-auto pt-2 position-relative">
 				<th:block th:if="${view != null}">
-					<th:block th:include="${view} :: container" />
+					<th:block th:replace="~{${view} :: container/content()}" />
 				</th:block>
 			</div>
 		</div>
@@ -134,7 +134,7 @@
 	</div>
 
 	<th:block th:if="${script != null && script}">
-		<th:block th:replace="${view} :: script" />
+		<th:block th:replace="~{${view} :: script}" />
 	</th:block>
 </body>
 

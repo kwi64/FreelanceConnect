@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Insert title here</title>
+
+	<style th:fragment="style">
+	</style>
+</head>
+
+<body>
+	<div th:fragment="container">
+		<form class="row h-100" id="form" th:object="${application}" method="post" action=""
+			enctype="multipart/form-data">
+			<div class="form-body">
+				<div class="row">
+					<div class="col-sm-12 col-md-10 col-lg-6 col-xl-6 col-xxl-4 mb-4">
+						<h4>Upload Your Resume</h4>
+						<div class="field mb-2">
+							<label>File types accepted .pdf, .docx</label>
+							<div class="input-group input-group-sm">
+								<label class="btn btn-outline-secondary" for="file">Upload</label>
+								<input class="form-control d-none" type="file" name="file" id="file" accept=".pdf,.docx"
+									onchange="onFileSelect(event)">
+								<input th:field="*{resumeFileName}" id="resumeFileName"
+									class="form-control input-group-text text-start" disabled />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12 col-xl-10 col-xxl-8">
+						<h4>Write Your Cover Letter</h4>
+						<div class="field mb-2">
+							<textarea name="coverLetter" th:field="*{coverLetter}" id="coverLetter"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-footer">
+				<div class="messages">
+					<label class="success" th:text="${success}"></label>
+					<label class="error" th:text="${error}"></label>
+				</div>
+				<div class="actions">
+
+					<th:block th:if="${canApply == true}">
+						<button class="btn btn-success btn-sm ms-4" type="submit" value="submit" name="action">Submit
+							Application</button>
+					</th:block>
+					<th:block th:if="${canApply == false}">
+						<a class="btn btn-warning btn-sm ms-4"
+							th:href="@{'/freelancer/jobs/' + ${job_id} + '/apply'}">View Previous Page</a>
+						<a class="btn btn-warning btn-sm ms-4" th:href="@{'/freelancer/jobs'}">Browse Jobs</a>
+					</th:block>
+
+
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<script th:fragment="script">
+
+		$("#form").validate({
+			ignore: "",
+			errorPlacement: function (error, element) {
+				error.appendTo(element.parents(".field"));
+			},
+			rules: {
+				file: {
+					required: function (element) {
+						return $("#resumeFileName").val().trim().length == 0
+					},
+					accept: "pdf,docx"
+				},
+				coverLetter: {
+					required: function (element) {
+						return tinymce.get("coverLetter").getContent().length == 0;
+					}
+				}
+			},
+			messages: {
+				file: {
+					required: "Please upload a resume",
+					accept: "Only .pdf, .docx files are accepted"
+				},
+				coverLetter: {
+					required: "Please write a cover letter!"
+				}
+			}
+		});
+
+		function onFileSelect(e) {
+			var fileName = e.target.files.length > 0 ? e.target.files[0].name : "";
+			$("#resumeFileName").val(fileName);
+		}
+
+		tinymce.init({
+			selector: '#coverLetter',
+			removed_menuitems: 'print'
+		});
+
+
+	</script>
+</body>
+
+</html>

@@ -1,8 +1,7 @@
 package com.csis3275.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties.Authentication;
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,9 +23,14 @@ public class ManageProfileController {
 	@Autowired
 	private UserService userService2;
 	
-	@GetMapping("/freelancer/manage-profile/{id}") 
-	public String manageProfile(@PathVariable(required = true) Long id, Model model) {
+	@GetMapping("/freelancer/manage-profile") 
+	public String manageProfile(Model model) {
 		model.addAttribute("view", "freelancer/profile/manage_profile");
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserPrincipal principal = (UserPrincipal) auth.getPrincipal();
+		long id = principal.getId();
+		
 		model.addAttribute("userProfileInfo", userService.getUserProfileInfo(id));
 		model.addAttribute("user", userService2.getUserInfo(id));
 		return "layout";

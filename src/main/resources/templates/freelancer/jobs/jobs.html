@@ -43,7 +43,12 @@
 					<p class="m-0"><small th:text="${selected.postedOn}"></small></p>
 					<div class="row mb-4 mt-3">
 						<div class="col-12">
-							<a class="btn btn-success" th:href="@{'/freelancer/jobs/' + ${selected.job.ID} + '/apply'}">Apply Now</a>
+							<th:block th:if="${canApply == true}">
+								<a class="btn btn-success" th:href="@{'/freelancer/jobs/' + ${selected.job.ID} + '/apply'}">Apply Now</a>	
+							</th:block>
+							<th:block th:if="${canApply == false}">
+								<a class="btn btn-secondary" th:href="@{'/freelancer/jobs/' + ${selected.job.ID} + '/apply'}">You have applied!</a>	
+							</th:block>
 						</div>
 					</div>
 					<div class="row">

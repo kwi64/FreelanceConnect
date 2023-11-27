@@ -42,7 +42,6 @@ public class JobController {
 	public String createJob(Model model) {
 		model.addAttribute("view", "employer/createJob/createJob");
 		model.addAttribute("createJob",new Job());
-		
 		return "layout";
 	}
 	

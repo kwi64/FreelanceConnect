@@ -13,6 +13,9 @@
 					<tr th:each="user: ${userProfileInfo}">
 						<td><a th:href="@{'/freelancer/delete-profile?deleteuser/' + ${user.id}}" class="btn btn-warning">Delete Profile</a></td>
 						<td><a th:href="@{'/freelancer/add-info/' + ${user.id}}" class="btn btn-warning">Edit Profile</a></td>
+					<!--	
+						<td><a th:href="@{'/freelancer/add-experience/' + ${user.id}}" class="btn btn-warning">Add Work Experience</a></td>
+					-->
 					</tr>
 				</div>
 			</div>

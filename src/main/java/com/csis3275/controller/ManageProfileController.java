@@ -54,6 +54,13 @@ public class ManageProfileController {
 		return "redirect:/freelancer/manage-profile/{id}";
 	}
 	
+	@GetMapping("/freelancer/add-experience/{id}") 
+	public String addExperience(@PathVariable(required = true) Long id, Model model) {
+		model.addAttribute("view", "freelancer/profile/add_experience");
+		//model.addAttribute("createExperience", )
+		return "layout";
+	}
+	
 	
 	
 }

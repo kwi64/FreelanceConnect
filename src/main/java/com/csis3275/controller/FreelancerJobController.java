@@ -350,7 +350,7 @@ public class FreelancerJobController {
 					}
 				}
 				
-				if(experience.getToDate() != null) {
+				if(!experience.isCurrentlyWorking() && experience.getToDate() != null) {
 					Period ending = Period.between(experience.getToDate(), now);
 					if(ending.isNegative()) {
 						errors.put("workExperienceList_"+ i +"_toDate", "Invalid end date.");

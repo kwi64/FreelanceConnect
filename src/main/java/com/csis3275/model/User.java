@@ -4,20 +4,26 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
 
 @Entity
+@Inheritance(strategy=InheritanceType.JOINED)
 @Table(name="users")
 public class User{
 	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
 	private String name;
 	private String username;
 	private String password;
 	private boolean enabled;
 	private Role role;
+	
 	
 	public User(String name, String username, String password, Role role, boolean enabled) {
 		this.name = name;

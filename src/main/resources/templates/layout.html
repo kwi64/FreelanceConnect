@@ -96,6 +96,7 @@
 								<a th:class="${g_path.contains(to)} ? 'nav-link active' : 'nav-link'" th:href="@{${to}}">New
 									Job Posting</a>
 							</li>
+							
 
 						</th:block>
 
@@ -118,7 +119,7 @@
 			</div>
 			<div class="container-fluid overflow-auto pt-2 position-relative">
 				<th:block th:if="${view != null}">
-					<th:block th:replace="~{${view} :: container/content()}" />
+					<th:block th:include="${view} :: container" />
 				</th:block>
 			</div>
 		</div>

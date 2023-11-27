@@ -1,5 +1,6 @@
 package com.csis3275.model;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;

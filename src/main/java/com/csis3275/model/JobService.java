@@ -1,5 +1,6 @@
 package com.csis3275.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,9 @@ public class JobService {
 	
 	@Autowired
 	private JobRepository jobRepository;
+	
+	@Autowired
+	private IJobApplicationRepository repository;
 	
 	
 	
@@ -28,5 +32,11 @@ public class JobService {
 	public Job viewApplications(Long ID) {
 		return jobRepository.findById(ID).orElse(new Job());
 	}
+	
+	public List<JobApplication> listJobApplications(Long ID) {
+		List<JobApplication> jobList = (List<JobApplication>)repository.findAllApplicationsByJobId(ID);
+		return jobList;
+	}
+
 
 }

@@ -12,4 +12,7 @@ public interface IJobApplicationRepository extends CrudRepository<JobApplication
 
 	@Query("SELECT ja FROM JobApplication ja WHERE userId = :userId AND jobId = :jobId")
 	Optional<JobApplication> findJobApplicationByUserIdAndJobId(Long userId, Long jobId);
+	
+	@Query("SELECT ja FROM JobApplication ja WHERE jobId = :ID")
+	List<JobApplication> findAllApplicationsByJobId(Long ID);
 }

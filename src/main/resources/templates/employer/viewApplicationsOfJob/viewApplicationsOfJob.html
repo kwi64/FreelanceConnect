@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Freelance Connect</title>
+</head>
+<body>
+    <div th:fragment="container">
+    
+    <h1>Application</h1>
+    
+    <h3>
+    	<span th:text="${viewApplication.name}" th:remove="tag"></span>
+    </h3>
+    <p> 
+    	<span th:text="${viewApplication.city}" th:remove="tag"></span>,
+    	<span th:text="${viewApplication.province}" th:remove="tag"></span>
+    </p>
+    
+    <h3>Work Experience</h3>    	
+	<th:block th:each="experience: ${viewApplicationWorkExperience}">
+	<h4>Job Title: <span  th:text="${experience.title}"></span></h4>
+	<p>
+		Employer Company: <span  th:text="${experience.company}"></span> <br>
+		From: <span  th:text="${experience.fromDate}"></span> 
+		to: <span  th:text="${experience.toDate}"></span> <br>
+	</p>
+	</th:block>
+    
+    <h3>Skills</h3>
+
+		<table>
+    		<tr th:each="skill: ${viewApplicationSkill}">
+			<td th:text="${skill.name}" />
+			</tr>
+			
+    	</table>
+    	<br>
+    	<table>
+    		<tr>
+    	<td><a th:href="@{'/employer/viewJob'}" class="btn" style="background-color: gray;">View Jobs</a></td>
+    	<td><a th:href="@{'/employer/message?id=' + ${viewApplication.id}}" class="btn" style="background-color: gray;">Message</a></td>
+    	<td><a th:href="@{'/employer/rejectApplication?id=' + ${viewApplication.id}}" class="btn" style="background-color: red;">Reject</a></td>
+    		</tr>
+    	</table>
+    </div>
+</body>
+</html>

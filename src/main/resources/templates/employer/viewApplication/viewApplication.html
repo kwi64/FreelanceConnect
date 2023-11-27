@@ -20,13 +20,18 @@
 				<td th:text="${job.title}" />
 				<td th:text="${job.employerTitle}" />
 				<td th:text="${job.location}" />
-				
+			</tr>
+			
+			<tr th:each="jobApplication: ${viewApplication}">
+				<td th:text="${jobApplication.name}" />
+				<td th:text="${jobApplication.country}" />
+				<td><a th:href="@{'/employer/viewApplicationsOfJob?id=' + ${jobApplication.id}}" class="btn" style="background-color: gray;">View Application</a></td>
+				<td><a th:href="@{'/employer/rejectApplication?id=' + ${jobApplication.id}}" class="btn" style="background-color: red;">Reject Application</a></td>
 			</tr>
     	</table>
     </div>
     <a class="btn" style="background-color: gray;"href="createJob">Create New Posting</a>
     <a class="btn" style="background-color: gray;"href="viewJob">View Jobs</a>
- 	<a class="btn" style="background-color: gray;float: right;"href="viewJob">Next</a>
     </div>
     </div>
 </body>

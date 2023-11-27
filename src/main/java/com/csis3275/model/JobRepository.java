@@ -10,4 +10,5 @@ public interface JobRepository extends CrudRepository<Job, Long>	{
 	
 	@Query("SELECT j FROM Job j ORDER BY j.validityStartDate DESC")
 	List<Job> findAllOrderByStartDate();
+	
 }

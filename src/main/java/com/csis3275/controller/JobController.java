@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import com.csis3275.model.Job;
+import com.csis3275.model.JobApplicationService;
+import com.csis3275.model.JobApplicationSkillService;
+import com.csis3275.model.JobApplicationWorkExperienceService;
 import com.csis3275.model.JobService;
 
 
@@ -16,6 +19,16 @@ public class JobController {
 
 	@Autowired
 	private JobService jobService;
+	
+	@Autowired
+	private JobApplicationService jobApplicationService;
+	
+	@Autowired
+	private JobApplicationSkillService jobApplicationSkillService;
+	
+	@Autowired
+	private JobApplicationWorkExperienceService jobApplicationWorkExperienceService;
+	
 	private ArrayList<Job> jobList = new ArrayList<Job>();
 	
 	@GetMapping("/employer/viewJob")
@@ -55,9 +68,26 @@ public class JobController {
 	}
 	
 	@GetMapping("/employer/viewApplication")
-	public String viewApplication(@RequestParam("ID") Long ID,Model model)	{
+	public String viewApplication( Long ID,  Model model)	{
 		model.addAttribute("view", "employer/viewApplication/viewApplication");
 		model.addAttribute("viewJob", jobService.viewApplications((Long) ID));
+		model.addAttribute("viewApplication", jobService.listJobApplications((Long) ID));
 		return "layout";
+	}
+	
+	@GetMapping("/employer/viewApplicationsOfJob")
+	public String viewApplicationsOfJob(Long id, Model model) {
+		model.addAttribute("view", "employer/viewApplicationsOfJob/viewApplicationsOfJob");
+		model.addAttribute("viewApplication", jobApplicationService.getJobApplication((Long) id));
+		model.addAttribute("viewApplicationSkill", jobApplicationSkillService.getAllByJobApplicationId((Long) id));
+		model.addAttribute("viewApplicationWorkExperience", jobApplicationWorkExperienceService.getAllByJobApplicationId((Long) id));
+		return "layout";
+	}
+	
+	@GetMapping("/employer/rejectApplication")
+	public String rejectApplication(Long id, Model model) {
+		model.addAttribute("view", "employer/viewApplicationsOfJob/viewApplicationsOfJob");
+		jobApplicationService.rejectJobApplication(id);
+		return "redirect:/employer/viewJob";
 	}
 }

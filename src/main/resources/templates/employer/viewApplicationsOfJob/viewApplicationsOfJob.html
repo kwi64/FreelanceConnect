@@ -33,6 +33,14 @@
     		<tr th:each="skill: ${viewApplicationSkill}">
 			<td th:text="${skill.name}" />
 			</tr>
+			
+    	</table>
+    	
+    	<table>
+    		<tr>
+    	<td><a th:href="@{'/employer/message?id=' + ${viewApplication.id}}" class="btn" style="background-color: gray;">Message</a></td>
+    	<td><a th:href="@{'/employer/rejectApplication?id=' + ${viewApplication.id}}" class="btn" style="background-color: red;">Delete</a></td>
+    		</tr>
     	</table>
     </div>
 </body>

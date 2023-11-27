@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.ArrayList;
 import com.csis3275.model.Job;
 import com.csis3275.model.JobApplicationService;
+import com.csis3275.model.JobApplicationSkillService;
+import com.csis3275.model.JobApplicationWorkExperienceService;
 import com.csis3275.model.JobService;
 
 
@@ -20,6 +22,12 @@ public class JobController {
 	
 	@Autowired
 	private JobApplicationService jobApplicationService;
+	
+	@Autowired
+	private JobApplicationSkillService jobApplicationSkillService;
+	
+	@Autowired
+	private JobApplicationWorkExperienceService jobApplicationWorkExperienceService;
 	
 	private ArrayList<Job> jobList = new ArrayList<Job>();
 	
@@ -71,6 +79,8 @@ public class JobController {
 	public String viewApplicationsOfJob(Long id, Model model) {
 		model.addAttribute("view", "employer/viewApplicationsOfJob/viewApplicationsOfJob");
 		model.addAttribute("viewApplication", jobApplicationService.getJobApplication((Long) id));
+		model.addAttribute("viewApplicationSkill", jobApplicationSkillService.getAllByJobApplicationId((Long) id));
+		model.addAttribute("viewApplicationWorkExperience", jobApplicationWorkExperienceService.getAllByJobApplicationId((Long) id));
 		return "layout";
 	}
 	

@@ -13,11 +13,27 @@
     	<span th:text="${viewApplication.name}" th:remove="tag"></span>
     </h3>
     <p> 
-    	<span th:text="${viewApplication.country}" th:remove="tag"></span>
+    	<span th:text="${viewApplication.city}" th:remove="tag"></span>,
+    	<span th:text="${viewApplication.province}" th:remove="tag"></span>
     </p>
-
+    
+    <h3>Work Experience</h3>    	
+	<th:block th:each="experience: ${viewApplicationWorkExperience}">
+	<h4>Job Title: <span  th:text="${experience.title}"></span></h4>
 	<p>
+		Employer Company: <span  th:text="${experience.company}"></span> <br>
+		From: <span  th:text="${experience.fromDate}"></span> 
+		to: <span  th:text="${experience.toDate}"></span> <br>
 	</p>
+	</th:block>
+    
+    <h3>Skills</h3>
+
+		<table>
+    		<tr th:each="skill: ${viewApplicationSkill}">
+			<td th:text="${skill.name}" />
+			</tr>
+    	</table>
     </div>
 </body>
 </html>

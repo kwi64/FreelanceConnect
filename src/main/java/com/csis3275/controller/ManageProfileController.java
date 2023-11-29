@@ -37,25 +37,39 @@ public class ManageProfileController {
 	}
 	
 	@GetMapping("/freelancer/delete-profile")
-	public String deleteUser(@RequestParam("deleteuser") String id)	{
-		userService.deleteUser(Long.parseLong(id));
+	public String deleteUser()	{
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserPrincipal principal = (UserPrincipal) auth.getPrincipal();
+		long id = principal.getId();
+		
+		userService.deleteUser(id);
 		return "redirect:/login";	
 	}
 	
-	@GetMapping("/freelancer/add-info/{id}")
-	public String addInfo(@PathVariable(required = true) Long id, Model model) {
+	@GetMapping("/freelancer/add-info")
+	public String addInfo(Model model) {
 		model.addAttribute("view", "freelancer/profile/add_info");
 		model.addAttribute("script", true);
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserPrincipal principal = (UserPrincipal) auth.getPrincipal();
+		long id = principal.getId();
+		
 		model.addAttribute("createInfo", userService.getUserProfileInfo(id));
 		model.addAttribute("updateUser" , userService2.getUserInfo(id));
 		return "layout";
 	}
 	
-	@PostMapping("/freelancer/add-info/{id}")
-	public String addInfo(@PathVariable(required = true) Long id, UserProfile newInfo) {
+	@PostMapping("/freelancer/add-info")
+	public String addInfo(UserProfile newInfo) {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserPrincipal principal = (UserPrincipal) auth.getPrincipal();
+		long id = principal.getId();
+		
 		userService.updateInfo(newInfo);
-		//userService2.updateInfo(newInfo);
-		return "redirect:/freelancer/manage-profile/{id}";
+		return "redirect:/freelancer/manage-profile";
 	}
 	
 	@GetMapping("/freelancer/add-experience/{id}") 

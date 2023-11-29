@@ -11,8 +11,8 @@
 				<h4>Manage Profile</h4>
 				<div class="field mb-2">
 					<tr th:each="user: ${userProfileInfo}">
-						<td><a th:href="@{'/freelancer/delete-profile?deleteuser/' + ${user.id}}" class="btn btn-warning">Delete Profile</a></td>
-						<td><a th:href="@{'/freelancer/add-info/' + ${user.id}}" class="btn btn-warning">Edit Profile</a></td>
+						<td><a th:href="@{/freelancer/delete-profile}" class="btn btn-warning">Delete Profile</a></td>
+						<td><a th:href="@{/freelancer/add-info}" class="btn btn-warning">Edit Profile</a></td>
 					<!--	
 						<td><a th:href="@{'/freelancer/add-experience/' + ${user.id}}" class="btn btn-warning">Add Work Experience</a></td>
 					-->

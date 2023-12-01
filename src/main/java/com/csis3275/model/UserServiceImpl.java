@@ -29,9 +29,9 @@ public class UserServiceImpl {
 		userProfileRepo.deleteById(id);
 	}
 	
-	public void updateInfo(UserProfile user) {
-		UserProfile updatedUser = (UserProfile) userProfileRepo.findById(user.getId()).orElse(new UserProfile());
-		
+	public void updateInfo(UserProfile user, Long id) {
+		//UserProfile updatedUser = (UserProfile) userProfileRepo.findById(user.getId()).orElse(new UserProfile());
+		UserProfile updatedUser = (UserProfile) userProfileRepo.findById(id).orElse(new UserProfile());
 		if(user.getAddress1() != null) {
 			updatedUser.setAddress1(user.getAddress1());
 		}

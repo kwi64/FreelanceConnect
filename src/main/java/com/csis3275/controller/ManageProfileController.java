@@ -10,10 +10,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.csis3275.model.IUserWorkExperience;
+import com.csis3275.model.User;
+import com.csis3275.model.UserExperienceServiceImpl;
 import com.csis3275.model.UserPrincipal;
 import com.csis3275.model.UserProfile;
 import com.csis3275.model.UserService;
 import com.csis3275.model.UserServiceImpl;
+import com.csis3275.model.UserWorkExperience;
 
 @Controller
 public class ManageProfileController {
@@ -22,6 +26,12 @@ public class ManageProfileController {
 	private UserServiceImpl userService;
 	@Autowired
 	private UserService userService2;
+	@Autowired
+	private UserExperienceServiceImpl userExperience;
+	
+	private IUserWorkExperience userExperienceRepo;
+	
+	
 	
 	@GetMapping("/freelancer/manage-profile") 
 	public String manageProfile(Model model) {
@@ -33,6 +43,7 @@ public class ManageProfileController {
 		
 		model.addAttribute("userProfileInfo", userService.getUserProfileInfo(id));
 		model.addAttribute("user", userService2.getUserInfo(id));
+		//model.addAttribute("createExperience", userExperience.getUserExperience(id));
 		return "layout";
 	}
 	
@@ -80,17 +91,23 @@ public class ManageProfileController {
 		UserPrincipal principal = (UserPrincipal) auth.getPrincipal();
 		long id = principal.getId();
 		
-		model.addAttribute("createExperience", userService.getUserProfileInfo(id));
+		model.addAttribute("createExperience", userExperience.getUserExperience(id));
 		return "layout";
 	}
 	
 	@PostMapping("/freelancer/add-experience")
-	public String addExperience(UserProfile newInfo) {
+	public String addExperience(UserWorkExperience newInfo) {
+		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserPrincipal principal = (UserPrincipal) auth.getPrincipal();
 		long id = principal.getId();
 		
-		userService.updateInfo(newInfo, id);
+		UserWorkExperience createdExperience = (UserWorkExperience) userService2.createUser(new UserWorkExperience(
+				newInfo.getName(), newInfo.getUsername(), newInfo.getPassword(), 
+				newInfo.getRole(),true,null,null,null,null));
+		userExperienceRepo.save(createdExperience);
+		
+		//userExperience.updateExperience(newInfo, id);
 		return"redirect:/freelancer/manage-profile";
 	}
 	

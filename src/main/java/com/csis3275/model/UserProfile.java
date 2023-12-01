@@ -1,46 +1,61 @@
 package com.csis3275.model;
 
-import java.time.LocalDate;
+import java.util.List;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name="userInfo")
 public class UserProfile extends User{
 	
+//	private Long userId;
+	
 	private String address1;
 	private String address2;
 	private String city;
 	private String province;
 	private String country;
-	private String title;
-	private String company;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate dateOfHire;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate dateOfQuit;
+	
 	private String skills;
 	
-	public UserProfile(String name, String username, String password, Role role, boolean enabled, String address1, String address2,
-		String city, String province, String country, String title, String company, LocalDate dateOfHire, LocalDate dateOfQuit, String skills) {
+//	@OneToMany(mappedBy = "userExperience", cascade = CascadeType.REMOVE)
+//    private List<UserWorkExperience> userExperienceList;
+	
+	public UserProfile(//Long userId, 
+			String name, String username, String password, Role role, boolean enabled, String address1, String address2,
+		String city, String province, String country, String skills) {
 		super(name, username, password, role, enabled);
+		//this.userId = userId;
 		this.address1 = address1;
 		this.address2 = address2;
 		this.city = city;
 		this.province = province;
 		this.country = country;
-		this.title = title;
-		this.company = company;
-		this.dateOfHire = dateOfHire;
-		this.dateOfQuit = dateOfQuit;
 		this.skills = skills;
 	}
 
 	public UserProfile() {
 	}
+
+	
+//	public Long getUserId() {
+//		return userId;
+//	}
+//
+//	public void setUserId(Long userId) {
+//		this.userId = userId;
+//	}
+//
+//	public List<UserWorkExperience> getUserExperienceList() {
+//		return userExperienceList;
+//	}
+//
+//	public void setUserExperienceList(List<UserWorkExperience> userExperienceList) {
+//		this.userExperienceList = userExperienceList;
+//	}
 
 	public String getAddress1() {
 		return address1;
@@ -71,30 +86,6 @@ public class UserProfile extends User{
 	}
 	public void setCountry(String country) {
 		this.country = country;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public String getCompany() {
-		return company;
-	}
-	public void setCompany(String company) {
-		this.company = company;
-	}
-	public LocalDate getDateOfHire() {
-		return dateOfHire;
-	}
-	public void setDateOfHire(LocalDate dateOfHire) {
-		this.dateOfHire = dateOfHire;
-	}
-	public LocalDate getDateOfQuit() {
-		return dateOfQuit;
-	}
-	public void setDateOfQuit(LocalDate dateOfQuit) {
-		this.dateOfQuit = dateOfQuit;
 	}
 	public String getSkills() {
 		return skills;

@@ -1,8 +1,5 @@
 package com.csis3275.model;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,10 +14,6 @@ public class UserServiceImpl {
 		return userProfileRepo.save(newUser);
 	}
 	
-	/*public List<UserProfile> readUsers()	{
-		return (List<UserProfile>)userProfileRepo.findAll();
-	}*/
-	
 	public UserProfile getUserProfileInfo(Long id) {
 		return (UserProfile) userProfileRepo.findById(id).orElse(new UserProfile());
 	}
@@ -30,7 +23,6 @@ public class UserServiceImpl {
 	}
 	
 	public void updateInfo(UserProfile user, Long id) {
-		//UserProfile updatedUser = (UserProfile) userProfileRepo.findById(user.getId()).orElse(new UserProfile());
 		UserProfile updatedUser = (UserProfile) userProfileRepo.findById(id).orElse(new UserProfile());
 		if(user.getAddress1() != null) {
 			updatedUser.setAddress1(user.getAddress1());
@@ -41,26 +33,14 @@ public class UserServiceImpl {
 		if(user.getCity() != null) {
 			updatedUser.setCity(user.getCity());
 		}
-		if(user.getCompany() != null) {
-			updatedUser.setCompany(user.getCompany());
-		}
 		if(user.getCountry() != null) {
 			updatedUser.setCountry(user.getCountry());
-		}
-		if(user.getDateOfHire() != null) {
-			updatedUser.setDateOfHire(user.getDateOfHire());
-		}
-		if(user.getDateOfQuit() != null) {
-			updatedUser.setDateOfQuit(user.getDateOfQuit());
 		}
 		if(user.getProvince() != null) {
 			updatedUser.setProvince(user.getProvince());
 		}
 		if(user.getSkills() != null) {
 			updatedUser.setSkills(user.getSkills());
-		}
-		if(user.getTitle() != null) {
-			updatedUser.setTitle(user.getTitle());
 		}
 		//from User class
 		if(user.getName() != null) {

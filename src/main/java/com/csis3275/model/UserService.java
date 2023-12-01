@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 public class UserService {
 	@Autowired
 	private IUserRepository repository;
+	@Autowired 
+	private IUserWorkExperience userExpRepo;
 	
 	public User getUserInfo(Long id) {
 		return (UserProfile) repository.findById(id).orElse(new UserProfile());
@@ -29,6 +31,14 @@ public class UserService {
 			updatedUser.setPassword(user.getPassword());
 		}
 		repository.save(updatedUser);
+	}
+	
+	public UserWorkExperience createUser(UserWorkExperience user) {
+		user.setUsername(user.getUsername().trim());
+		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+		user.setEnabled(true);
+		
+		return userExpRepo.save(user);
 	}
 	
 	public User createUser(User user) {

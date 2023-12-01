@@ -58,8 +58,12 @@ public class AuthenticationController {
 		}
 		
 		//Creating user for tables "users" and "user_info" 
-		User createdUser = userDAO.createUser(new UserProfile(user.getName(), user.getUsername(), user.getPassword(), 
-				user.getRole(),true,null,null,null,null,null,null,null,null,null,null));
+		//FIRST NULL MUST BE CHANGED
+		User createdUser = userDAO.createUser(new UserProfile(//null, 
+				user.getName(), user.getUsername(), user.getPassword(), 
+				user.getRole(),true,null,null,null,null,null,null
+				//null,null,null,null
+				));
 		userProfileRepository.save(createdUser);
 		
 		attributes.addFlashAttribute("user", new User());

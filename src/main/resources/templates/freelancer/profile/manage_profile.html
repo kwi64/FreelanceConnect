@@ -10,7 +10,7 @@
 			<div class="col-2" style="border: 1px solid black; margin: 5px;">
 				<h4>Manage Profile</h4>
 				<div class="field mb-2">
-					<tr th:each="user: ${userProfileInfo}">
+					<tr>
 						<td><a th:href="@{/freelancer/delete-profile}" class="btn btn-danger" style='width: 150px; height: 40px;'>Delete Profile</a></td>
 						<td><a th:href="@{/freelancer/add-info}" class="btn btn-warning" style='width: 150px; height: 40px; margin-top: 10px;' >Edit Profile</a></td>
 						<td><a th:href="@{/freelancer/add-experience}" class="btn btn-warning" style='width: 150px; height: 40px; margin-top: 10px;' >Edit Experience</a></td>
@@ -51,18 +51,18 @@
 			</div>
 			<div class="col-4" style="border: 1px solid black; margin: 5px;">
 				<h4>Previous  Experience</h4>
-					<tr th:each="userInfo: ${userProfileInfo}">
+					<tr th:each="createExperience: ${createExperience}">
 						<td>Previous Company:</td>
-						<td th:text="${userInfo.company}"></td>
+						<td th:text="${createExperience.company}"></td>
 						<br>
 						<td>Previous Job Title:</td>
-						<td th:text="${userInfo.title}"></td>
+						<td th:text="${createExperience.title}"></td>
 						<br>
 						<td>Date Of Hire:</td>
-						<td th:text="${userInfo.dateOfHire}"></td>
+						<td th:text="${createExperience.dateOfHire}"></td>
 						<br>
 						<td>Date Of Departure:</td>
-						<td th:text="${userInfo.dateOfQuit}"></td>
+						<td th:text="${createExperience.dateOfQuit}"></td>
 					</tr>
 				</div>
 			</div>

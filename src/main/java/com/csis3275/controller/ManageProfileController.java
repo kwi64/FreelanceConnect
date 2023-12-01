@@ -37,8 +37,13 @@ public class ManageProfileController {
 	}
 	
 	@GetMapping("/freelancer/delete-profile")
-	public String deleteUser(@RequestParam("deleteuser") String id)	{
-		userService.deleteUser(Long.parseLong(id));
+	public String deleteUser()	{
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserPrincipal principal = (UserPrincipal) auth.getPrincipal();
+		long id = principal.getId();
+		
+		userService.deleteUser(id);
 		return "redirect:/login";	
 	}
 	

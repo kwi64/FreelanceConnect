@@ -33,14 +33,6 @@ public class UserService {
 		repository.save(updatedUser);
 	}
 	
-	public UserWorkExperience createUser(UserWorkExperience user) {
-		user.setUsername(user.getUsername().trim());
-		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-		user.setEnabled(true);
-		
-		return userExpRepo.save(user);
-	}
-	
 	public User createUser(User user) {
 		user.setUsername(user.getUsername().trim());
 		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));

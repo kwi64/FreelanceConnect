@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Bean;
 import com.csis3275.model.UserProfile;
 import com.csis3275.model.UserService;
 import com.csis3275.model.UserServiceImpl;
+import com.csis3275.model.UserWorkExperience;
 import com.csis3275.model.IUserProfile;
 import com.csis3275.model.IUserRepository;
 import com.csis3275.model.IUserWorkExperience;
@@ -39,22 +40,15 @@ public class FreelanceConnectApplication {
 		SpringApplication.run(FreelanceConnectApplication.class, args);
 		
 		IUserRepository userProfileRepository = configurableApplicationContext.getBean(IUserProfile.class);
-		//IUserWorkExperience userExperienceRepository = configurableApplicationContext.getBean(IUserWorkExperience.class);
 		UserService userDAO = configurableApplicationContext.getBean(UserService.class);
 		
-		User user1 = userDAO.createUser(new UserProfile(//(long) 1,
-				"Freelancer", "freelancer@connect.com", "password", Role.FREELANCER, true,null,null,null,null,null,null
-				//null,null,null,null
-				));
-		User user2 = userDAO.createUser(new UserProfile(//(long) 2,
-				"Employer", "employer@connect.com", "password", Role.EMPLOYER, true,null,null,null,null,null,null
-				//null,null,null,null
-				));
+		User user1 = userDAO.createUser(new UserProfile(
+				"Freelancer", "freelancer@connect.com", "password", Role.FREELANCER, true,null,null,null,null,null,null));
 		
+		User user2 = userDAO.createUser(new UserProfile(
+				"Employer", "employer@connect.com", "password", Role.EMPLOYER, true,null,null,null,null,null,null));
 		userProfileRepository.save(user1);
-		//userExperienceRepository.save(user1);
 		userProfileRepository.save(user2);	
-		//userExperienceRepository.save(user2);
 	}
 	
 	

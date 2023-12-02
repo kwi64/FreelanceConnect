@@ -1,5 +1,7 @@
 package com.csis3275.model;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,26 +11,26 @@ public class UserExperienceServiceImpl {
 	@Autowired
 	private IUserWorkExperience repository;
 	
-	public UserWorkExperience getUserExperience(Long id) {
-		return (UserWorkExperience) repository.findById(id).orElse(new UserWorkExperience());
+	public UserWorkExperience createUserExperience(User user, UserWorkExperience experience) {
+		return repository.save(experience);
+	}
+	
+	public UserWorkExperience updateUserExperience(User user, UserWorkExperience experience) {
+		experience.setUser(user);
+		return repository.save(experience);
+	}
+	
+	public void deleteUserExperience(User user, UserWorkExperience experience) {
+		experience.setUser(user);
+		repository.delete(experience);
+	}
+	
+	public List<UserWorkExperience> getAllByUserId(Long userId) {
+		return repository.findAllByUserId(userId);
 	}
 
-
-	public void updateExperience(UserWorkExperience newInfo, Long id) {
-		UserWorkExperience updatedUser = (UserWorkExperience) repository.findById(id).orElse(new UserWorkExperience());
-		if(newInfo.getTitle() != null) {
-		updatedUser.setTitle(newInfo.getTitle());
-		}
-		if(newInfo.getDateOfHire() != null) {
-		updatedUser.setDateOfHire(newInfo.getDateOfHire());
-		}
-		if(newInfo.getDateOfQuit() != null) {
-		updatedUser.setDateOfQuit(newInfo.getDateOfQuit());
-		}
-		if(newInfo.getCompany() != null) {
-		updatedUser.setCompany(newInfo.getCompany());
-		}
-		repository.save(updatedUser);
+	public UserWorkExperience getUserExperience(long id) {
+		return (UserWorkExperience) repository.findById(id).orElse(new UserWorkExperience());
 	}
 	
 }

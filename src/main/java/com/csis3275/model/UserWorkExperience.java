@@ -15,7 +15,18 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "UserWorkExperience")
-public class UserWorkExperience extends User{
+public class UserWorkExperience{
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	
+	@ManyToOne
+	@JoinColumn(name = "user_experience_id")
+	private User user;
+	
+	@Column(name = "user_experience_id", insertable = false, updatable = false)
+    private Long userId;
 	
 	private String title;
 	private String company;
@@ -23,23 +34,30 @@ public class UserWorkExperience extends User{
 	private LocalDate dateOfHire;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dateOfQuit;
-	
-//	@ManyToOne
-//	@JoinColumn(name = "user_id")
-//    private User userExperience;
-//	
-//	@Column(name = "user_id", insertable = false, updatable = false)
-//    private Long userId;
 
-	public UserWorkExperience(String name, String username, String password, Role role, boolean enabled,
-		String title, String company, LocalDate dateOfHire, LocalDate dateOfQuit) {
-	super(name, username, password, role, enabled);
+
+	
+	public UserWorkExperience(User user, String title, String company, LocalDate dateOfHire, LocalDate dateOfQuit) {
+	this.user = user;
 	this.title = title;
 	this.company = company;
 	this.dateOfHire = dateOfHire;
 	this.dateOfQuit = dateOfQuit;
 	}
 	public UserWorkExperience() {
+	}
+	
+	public Long getUserId() {
+		return userId;
+	}
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 	public String getTitle() {
 		return title;
@@ -65,14 +83,4 @@ public class UserWorkExperience extends User{
 	public void setDateOfQuit(LocalDate dateOfQuit) {
 		this.dateOfQuit = dateOfQuit;
 	}
-//	public User getUserExperience() {
-//		return userExperience;
-//	}
-//	public void setUserExperience(User userExperience) {
-//		this.userExperience = userExperience;
-//	}
-
-	
-	
-	
 }

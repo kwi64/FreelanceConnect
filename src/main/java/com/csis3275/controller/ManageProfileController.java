@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.csis3275.model.IUserRepository;
 import com.csis3275.model.IUserWorkExperience;
 import com.csis3275.model.User;
 import com.csis3275.model.UserExperienceServiceImpl;
@@ -29,7 +30,11 @@ public class ManageProfileController {
 	@Autowired
 	private UserExperienceServiceImpl userExperience;
 	
+	@Autowired
 	private IUserWorkExperience userExperienceRepo;
+	
+	@Autowired
+	private IUserRepository userRepo;
 	
 	
 	
@@ -102,12 +107,9 @@ public class ManageProfileController {
 		UserPrincipal principal = (UserPrincipal) auth.getPrincipal();
 		long id = principal.getId();
 		
-		UserWorkExperience createdExperience = (UserWorkExperience) userService2.createUser(new UserWorkExperience(
-				newInfo.getName(), newInfo.getUsername(), newInfo.getPassword(), 
-				newInfo.getRole(),true,null,null,null,null));
-		userExperienceRepo.save(createdExperience);
+		User currUser = userService2.getUserInfo(id);
 		
-		//userExperience.updateExperience(newInfo, id);
+		userExperience.createUserExperience(currUser, new UserWorkExperience(currUser, newInfo.getTitle(), newInfo.getCompany(), newInfo.getDateOfHire(), newInfo.getDateOfQuit()));
 		return"redirect:/freelancer/manage-profile";
 	}
 	

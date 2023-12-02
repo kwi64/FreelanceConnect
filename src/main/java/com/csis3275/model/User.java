@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -26,6 +27,10 @@ public class User{
 	private String password;
 	private boolean enabled;
 	private Role role;
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<UserWorkExperience> userExperiences;
+	
 
 	public User(String name, String username, String password, Role role, boolean enabled) {
 		this.name = name;
@@ -36,6 +41,14 @@ public class User{
 	}
 	
 	public User() {}
+
+	public List<UserWorkExperience> getUserExperiences() {
+		return userExperiences;
+	}
+
+	public void setUserExperiences(List<UserWorkExperience> userExperiences) {
+		this.userExperiences = userExperiences;
+	}
 
 	public long getId() {
 		return id;

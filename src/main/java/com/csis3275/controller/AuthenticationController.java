@@ -56,13 +56,9 @@ public class AuthenticationController {
 
 			return "register/register";
 		}
-		
-		//Creating user for tables "users" and "user_info" 
-		//FIRST NULL MUST BE CHANGED
-		User createdUser = userDAO.createUser(new UserProfile(//null, 
+		User createdUser = userDAO.createUser(new UserProfile(
 				user.getName(), user.getUsername(), user.getPassword(), 
 				user.getRole(),true,null,null,null,null,null,null
-				//null,null,null,null
 				));
 		userProfileRepository.save(createdUser);
 		

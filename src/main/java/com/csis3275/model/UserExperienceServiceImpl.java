@@ -11,18 +11,16 @@ public class UserExperienceServiceImpl {
 	@Autowired
 	private IUserWorkExperience repository;
 	
-	public UserWorkExperience createUserExperience(User user, UserWorkExperience experience) {
+	public UserWorkExperience createUserExperience(UserWorkExperience experience) {
 		return repository.save(experience);
 	}
 	
-	public UserWorkExperience updateUserExperience(User user, UserWorkExperience experience) {
-		experience.setUser(user);
+	public UserWorkExperience updateUserExperience(UserWorkExperience experience) {
 		return repository.save(experience);
 	}
 	
-	public void deleteUserExperience(User user, UserWorkExperience experience) {
-		experience.setUser(user);
-		repository.delete(experience);
+	public void deleteUserExperiences(List <UserWorkExperience> experienceList) {
+		repository.deleteAll(experienceList);
 	}
 	
 	public List<UserWorkExperience> getAllByUserId(Long userId) {

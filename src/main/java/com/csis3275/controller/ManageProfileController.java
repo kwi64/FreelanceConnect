@@ -1,5 +1,7 @@
 package com.csis3275.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.csis3275.model.IUserRepository;
 import com.csis3275.model.IUserWorkExperience;
+import com.csis3275.model.JobApplicationWorkExperience;
 import com.csis3275.model.User;
 import com.csis3275.model.UserExperienceServiceImpl;
 import com.csis3275.model.UserPrincipal;
@@ -48,7 +51,12 @@ public class ManageProfileController {
 		
 		model.addAttribute("userProfileInfo", userService.getUserProfileInfo(id));
 		model.addAttribute("user", userService2.getUserInfo(id));
-		//model.addAttribute("createExperience", userExperience.getUserExperience(id));
+		
+		List<UserWorkExperience> workExperienceList = userExperience.getAllByUserId(id);
+		
+		
+		model.addAttribute("createExperience", workExperienceList);
+//			userExperience.getUserExperience(id));
 		return "layout";
 	}
 	
@@ -109,8 +117,21 @@ public class ManageProfileController {
 		
 		User currUser = userService2.getUserInfo(id);
 		
-		userExperience.createUserExperience(currUser, new UserWorkExperience(currUser, newInfo.getTitle(), newInfo.getCompany(), newInfo.getDateOfHire(), newInfo.getDateOfQuit()));
+		userExperience.createUserExperience(new UserWorkExperience(currUser, newInfo.getTitle(), newInfo.getCompany(), newInfo.getDateOfHire(), newInfo.getDateOfQuit()));
 		return"redirect:/freelancer/manage-profile";
+	}
+	
+	@GetMapping("/freelancer/delete-experience")
+	public String deleteAllExperience(UserWorkExperience expToDelete)	{
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserPrincipal principal = (UserPrincipal) auth.getPrincipal();
+		long id = principal.getId();
+		
+		List<UserWorkExperience> workExperienceList = userExperience.getAllByUserId(id);
+		
+		userExperience.deleteUserExperiences(workExperienceList);
+		return "redirect:/freelancer/manage-profile";	
 	}
 	
 	

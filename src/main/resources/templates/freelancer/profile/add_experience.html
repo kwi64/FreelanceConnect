@@ -26,6 +26,10 @@
 				<label for="quitDate" class="form-label small m-0">Date of Departure</label>
 				<input type="date" style='width: 200px; height: 30px;'name="quitDate" class="form-control form-control-sm" id="quitDate" th:field="${createExperience.dateOfQuit}"/>
 			</div>	
+			<div class="mb-3">
+				<label for="currentlyWorking" class="form-check-label small m-0">I Currently Work Here</label>
+				<input type="checkbox" style='margin: 10px;' id="currentlyWorking" th:field="${createExperience.currentlyWorking}"/>
+			</div>
 			<button type="submit" style='width: 200px; height: 45px;' class="btn btn-primary">Submit</button>
 		</form>
 	</div>

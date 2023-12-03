@@ -34,15 +34,17 @@ public class UserWorkExperience{
 	private LocalDate dateOfHire;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dateOfQuit;
+	private boolean currentlyWorking;
 
 
 	
-	public UserWorkExperience(User user, String title, String company, LocalDate dateOfHire, LocalDate dateOfQuit) {
+	public UserWorkExperience(User user, String title, String company, LocalDate dateOfHire, LocalDate dateOfQuit, boolean currentlyWorking) {
 	this.user = user;
 	this.title = title;
 	this.company = company;
 	this.dateOfHire = dateOfHire;
 	this.dateOfQuit = dateOfQuit;
+	this.currentlyWorking = currentlyWorking;
 	}
 	public UserWorkExperience() {
 	}
@@ -83,4 +85,11 @@ public class UserWorkExperience{
 	public void setDateOfQuit(LocalDate dateOfQuit) {
 		this.dateOfQuit = dateOfQuit;
 	}
+	public boolean isCurrentlyWorking() {
+		return currentlyWorking;
+	}
+	public void setCurrentlyWorking(boolean currentlyWorking) {
+		this.currentlyWorking = currentlyWorking;
+	}
+	
 }

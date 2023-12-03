@@ -9,25 +9,28 @@
 <body>
 	<div th:fragment="container">
 		<form class="col-6" id="myform" action="" th:object="${createExperience}" method="POST">
-			
-				<h4>Work Experience</h4>
-					<div class="mb-3">
-						<label for="title" class="form-label small m-0">Title</label>
-						<input type="text" style='width: 200px; height: 30px;' name="title" class="form-control form-control-sm" id="title" th:field="${createExperience.title}" >
-					</div>
-					<div class="mb-3">
-						<label for="company" class="form-label small m-0">Company</label>
-						<input type="text" style='width: 200px; height: 30px;' name="company" class="form-control form-control-sm" id="company" th:field="${createExperience.company}">
-					</div>
-					<div class="mb-3">
-						<label for="hireDate" class="form-label small m-0">Date of Hire</label>
-						<input type="date" style='width: 200px; height: 30px;'name="hireDate" class="form-control form-control-sm" id="hireDate" th:field="${createExperience.dateOfHire}"/>
-					</div>
-					<div class="mb-3">
-						<label for="quitDate" class="form-label small m-0">Date of Departure</label>
-						<input type="date" style='width: 200px; height: 30px;'name="quitDate" class="form-control form-control-sm" id="quitDate" th:field="${createExperience.dateOfQuit}"/>
-					</div>
-				
+			<h4>Work Experience</h4>
+			<div class="mb-3">
+				<label for="title" class="form-label small m-0">Title</label>
+				<input type="text" style='width: 200px; height: 30px;' name="title" class="form-control form-control-sm" id="title" th:field="${createExperience.title}" >
+			</div>
+			<div class="mb-3">
+				<label for="company" class="form-label small m-0">Company</label>
+				<input type="text" style='width: 200px; height: 30px;' name="company" class="form-control form-control-sm" id="company" th:field="${createExperience.company}">
+			</div>
+			<div class="mb-3">
+				<label for="hireDate" class="form-label small m-0">Date of Hire</label>
+				<input type="date" style='width: 200px; height: 30px;'name="hireDate" class="form-control form-control-sm" id="hireDate" th:field="${createExperience.dateOfHire}"/>
+			</div>
+			<div class="mb-3">
+				<label for="quitDate" class="form-label small m-0">Date of Departure</label>
+				<input type="date" style='width: 200px; height: 30px;'name="quitDate" class="form-control form-control-sm" id="quitDate" th:field="${createExperience.dateOfQuit}"/>
+			</div>	
+			<div class="mb-3">
+				<label for="currentlyWorking" class="form-check-label small m-0">I Currently Work Here</label>
+				<input type="checkbox" style='margin: 10px;' id="currentlyWorking" th:field="${createExperience.currentlyWorking}"/>
+			</div>
+			<button type="submit" style='width: 200px; height: 45px;' class="btn btn-primary">Submit</button>
 		</form>
 	</div>
 </body>

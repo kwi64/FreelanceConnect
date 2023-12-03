@@ -22,6 +22,9 @@ public class UserExperienceServiceImpl {
 	public void deleteUserExperiences(List <UserWorkExperience> experienceList) {
 		repository.deleteAll(experienceList);
 	}
+	public void deleteUserExperience(Long id) {
+		repository.deleteById(id);
+	}
 	
 	public List<UserWorkExperience> getAllByUserId(Long userId) {
 		return repository.findAllByUserId(userId);

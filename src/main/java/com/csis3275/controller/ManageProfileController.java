@@ -54,7 +54,6 @@ public class ManageProfileController {
 		
 		List<UserWorkExperience> workExperienceList = userExperience.getAllByUserId(id);
 		
-		
 		model.addAttribute("createExperience", workExperienceList);
 //			userExperience.getUserExperience(id));
 		return "layout";
@@ -121,7 +120,7 @@ public class ManageProfileController {
 		return"redirect:/freelancer/manage-profile";
 	}
 	
-	@GetMapping("/freelancer/delete-experience")
+	@GetMapping("/freelancer/delete-experiences")
 	public String deleteAllExperience(UserWorkExperience expToDelete)	{
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -131,6 +130,13 @@ public class ManageProfileController {
 		List<UserWorkExperience> workExperienceList = userExperience.getAllByUserId(id);
 		
 		userExperience.deleteUserExperiences(workExperienceList);
+		return "redirect:/freelancer/manage-profile";	
+	}
+	
+	@GetMapping("/freelancer/delete-experience/{id}")
+	public String deleteExperience(@PathVariable(required=true ) Long id){
+		
+		userExperience.deleteUserExperience(id);
 		return "redirect:/freelancer/manage-profile";	
 	}
 	

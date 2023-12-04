@@ -11,9 +11,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
 	@Autowired
 	private IUserRepository repository;
-	@Autowired 
-	private IUserWorkExperience userExpRepo;
-	
+
 	public User getUserInfo(Long id) {
 		return (UserProfile) repository.findById(id).orElse(new UserProfile());
 	}

@@ -148,7 +148,7 @@ public class FreelancerJobController {
 			if(application.getId() == 0) {
 				List<UserWorkExperience> exps = upExperienceService.getAllByUserId(principal.getId());
 				for(var exp: exps) {
-					workExperienceList.add(new JobApplicationWorkExperience(application, exp.getTitle(), exp.getCompany(), "", exp.getDateOfHire(), exp.getDateOfQuit(), exp.isCurrentlyWorking()));
+					workExperienceList.add(new JobApplicationWorkExperience(application, exp.getTitle(), exp.getCompany(), exp.getLocation(), exp.getDateOfHire(), exp.getDateOfQuit(), exp.isCurrentlyWorking()));
 				}
 			}
 			

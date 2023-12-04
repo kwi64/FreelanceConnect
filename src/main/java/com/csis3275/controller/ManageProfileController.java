@@ -116,7 +116,7 @@ public class ManageProfileController {
 		
 		User currUser = userService2.getUserInfo(id);
 		
-		userExperience.createUserExperience(new UserWorkExperience(currUser, newInfo.getTitle(), newInfo.getCompany(), newInfo.getDateOfHire(), newInfo.getDateOfQuit(), newInfo.isCurrentlyWorking()));
+		userExperience.createUserExperience(new UserWorkExperience(currUser, newInfo.getTitle(), newInfo.getCompany(), newInfo.getLocation(), newInfo.getDateOfHire(), newInfo.getDateOfQuit(), newInfo.isCurrentlyWorking()));
 		return"redirect:/freelancer/manage-profile";
 	}
 	

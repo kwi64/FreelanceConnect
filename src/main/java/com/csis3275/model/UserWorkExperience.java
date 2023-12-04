@@ -30,6 +30,7 @@ public class UserWorkExperience{
 	
 	private String title;
 	private String company;
+	private String location;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dateOfHire;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -38,10 +39,11 @@ public class UserWorkExperience{
 
 
 	
-	public UserWorkExperience(User user, String title, String company, LocalDate dateOfHire, LocalDate dateOfQuit, boolean currentlyWorking) {
+	public UserWorkExperience(User user, String title, String company, String location, LocalDate dateOfHire, LocalDate dateOfQuit, boolean currentlyWorking) {
 	this.user = user;
 	this.title = title;
 	this.company = company;
+	this.location = location;
 	this.dateOfHire = dateOfHire;
 	this.dateOfQuit = dateOfQuit;
 	this.currentlyWorking = currentlyWorking;
@@ -78,6 +80,12 @@ public class UserWorkExperience{
 	}
 	public void setCompany(String company) {
 		this.company = company;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
 	}
 	public LocalDate getDateOfHire() {
 		return dateOfHire;

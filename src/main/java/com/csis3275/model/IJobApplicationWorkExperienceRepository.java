@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IJobApplicationWorkExperienceRepository extends CrudRepository<JobApplicationWorkExperience, Long>{
 	
-	@Query("SELECT jawe FROM JobApplicationWorkExperience jawe WHERE jobApplicationId = :jobApplicationId")
+	@Query("SELECT uwe FROM JobApplicationWorkExperience uwe WHERE jobApplicationId = :jobApplicationId")
 	List<JobApplicationWorkExperience> findAllByJobApplicationId(Long jobApplicationId);
 }

@@ -7,20 +7,19 @@
 <body>
 	<div th:fragment="container">
 		<div class="row">
-			<div class="col-4">
+			<div class="col-2" style="border: 1px solid black; margin: 5px;">
 				<h4>Manage Profile</h4>
 				<div class="field mb-2">
-					<tr th:each="user: ${userProfileInfo}">
-						<td><a th:href="@{'/freelancer/delete-profile?deleteuser/' + ${user.id}}" class="btn btn-warning">Delete Profile</a></td>
-						<td><a th:href="@{'/freelancer/add-info/' + ${user.id}}" class="btn btn-warning">Edit Profile</a></td>
-					<!--	
-						<td><a th:href="@{'/freelancer/add-experience/' + ${user.id}}" class="btn btn-warning">Add Work Experience</a></td>
-					-->
+					<tr>
+						<td><a th:href="@{/freelancer/delete-profile}" class="btn btn-danger" style='width: 150px; height: 40px;'>Delete Profile</a></td>
+						<td><a th:href="@{/freelancer/delete-experiences}" class="btn btn-danger" style='width: 150px; height: 60px; margin-top: 10px;'>Delete All Experiences</a></td>
+						<td><a th:href="@{/freelancer/add-info}" class="btn btn-warning" style='width: 150px; height: 40px; margin-top: 10px;' >Edit Profile</a></td>
+						<td><a th:href="@{/freelancer/add-experience}" class="btn btn-warning" style='width: 150px; height: 40px; margin-top: 10px;' >Add Experience</a></td>
 					</tr>
 				</div>
 			</div>
-			<div class="col-6">
-				<h4>Your current information</h4>
+			<div class="col-4" style="border: 1px solid black; margin: 5px;">
+				<h4>Your Current Information</h4>
 				<div class="field mb-2">
 					<tr th:each="user: ${user}">
 						<td>Name:</td>
@@ -43,17 +42,38 @@
 						<td>Province:</td>
 						<td th:text="${userInfo.province}"></td>
 						<br>
-						<td>Previous Company:</td>
-						<td th:text="${userInfo.company}"></td>
-						<br>
-						<td>Previous Job Title:</td>
-						<td th:text="${userInfo.title}"></td>
-						<br>
 						<td>Country:</td>
 						<td th:text="${userInfo.country}"></td>
 						<br>
 						<td>Skills:</td>
 						<td th:text="${userInfo.skills}"></td>
+					</tr>
+				</div>
+			</div>
+			<div class="col-4" style="border: 1px solid black; margin: 5px;">
+				<h4>Previous  Experience</h4>
+					<tr th:each="createExperience: ${createExperience}">
+						<input type="hidden" th:test="${createExperience.id}"></input>
+						<td>Previous Job Title:</td>
+						<td th:text="${createExperience.title}"></td>
+						<br>
+						<td>Previous Company:</td>
+						<td th:text="${createExperience.company}"></td>
+						<br>
+						<td>Date Of Hire:</td>
+						<td th:text="${createExperience.dateOfHire}"></td>
+						<br>
+						<td>Date Of Departure:</td>
+						<td th:text="${createExperience.dateOfQuit}"></td>
+						<br>
+						<td th:if="${createExperience.currentlyWorking}">
+							<p>You currently work here!</p>
+						</td>
+						
+						<td><a th:href="@{'/freelancer/delete-experience/' + ${createExperience.id}}" class="btn btn-danger" style='width: 200px; height: 40px;'>Delete This Experience</a></td>
+						<br> 
+						
+						<br>
 					</tr>
 				</div>
 			</div>

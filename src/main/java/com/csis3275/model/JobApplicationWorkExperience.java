@@ -50,6 +50,17 @@ public class JobApplicationWorkExperience {
 		this.fromDate = fromDate;
 		this.toDate = toDate;
 	}
+	
+	public JobApplicationWorkExperience(JobApplication jobApplication, String title, String company, String location, LocalDate fromDate,
+			LocalDate toDate, boolean currentlyWorking) {
+		this.jobApplication = jobApplication;
+		this.title = title;
+		this.company = company;
+		this.location = location;
+		this.fromDate = fromDate;
+		this.toDate = toDate;
+		this.currentlyWorking = currentlyWorking;
+	}
 
 	public JobApplicationWorkExperience() {
 	}

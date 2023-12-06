@@ -1,63 +1,143 @@
 package com.csis3275.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties.Authentication;
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.csis3275.model.IUserRepository;
+import com.csis3275.model.IUserWorkExperience;
+import com.csis3275.model.JobApplicationWorkExperience;
+import com.csis3275.model.User;
+import com.csis3275.model.UserExperienceServiceImpl;
 import com.csis3275.model.UserPrincipal;
 import com.csis3275.model.UserProfile;
+import com.csis3275.model.UserService;
 import com.csis3275.model.UserServiceImpl;
+import com.csis3275.model.UserWorkExperience;
 
 @Controller
 public class ManageProfileController {
 
 	@Autowired
 	private UserServiceImpl userService;
+	@Autowired
+	private UserService userService2;
+	@Autowired
+	private UserExperienceServiceImpl userExperience;
+	
+	@Autowired
+	private IUserWorkExperience userExperienceRepo;
+	
+	@Autowired
+	private IUserRepository userRepo;
 	
 	
-	@GetMapping("/manage-profile") 
+	
+	@GetMapping("/freelancer/manage-profile") 
 	public String manageProfile(Model model) {
-		model.addAttribute("view", "profile/manage_profile");
-		model.addAttribute("userProfile", userService.getUserProfileInfo((long) 1));
-		/*
-		String email = "", password = "", name = "";
-		Boolean isFreelancer = true;
-		Authentication auth = (Authentication) SecurityContextHolder.getContext().getAuthentication();
-		if (auth!=null) {
-			UserPrincipal user = (UserPrincipal)((org.springframework.security.core.Authentication) auth).getPrincipal();
-			 email = user.getUsername();
-			 password = user.getPassword();
-			 isFreelancer = user.isFreelancer();
-			 name = user.getDisplayName();
-		}
-		*/
+		model.addAttribute("view", "freelancer/profile/manage_profile");
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserPrincipal principal = (UserPrincipal) auth.getPrincipal();
+		long id = principal.getId();
+		
+		model.addAttribute("userProfileInfo", userService.getUserProfileInfo(id));
+		model.addAttribute("user", userService2.getUserInfo(id));
+		
+		List<UserWorkExperience> workExperienceList = userExperience.getAllByUserId(id);
+		
+		model.addAttribute("createExperience", workExperienceList);
+//			userExperience.getUserExperience(id));
 		return "layout";
 	}
 	
-	@GetMapping("/delete-profile")
-	public String deleteUser(@RequestParam("deleteuser") String id)	{
-		userService.deleteUser(Long.parseLong(id));
+	@GetMapping("/freelancer/delete-profile")
+	public String deleteUser()	{
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserPrincipal principal = (UserPrincipal) auth.getPrincipal();
+		long id = principal.getId();
+		
+		userService.deleteUser(id);
 		return "redirect:/login";	
 	}
 	
-	@GetMapping("/add-info")
-	public String addInfo(@RequestParam("id") Long id, Model model) {
-		model.addAttribute("view", "profile/add_info");
+	@GetMapping("/freelancer/add-info")
+	public String addInfo(Model model) {
+		model.addAttribute("view", "freelancer/profile/add_info");
 		model.addAttribute("script", true);
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserPrincipal principal = (UserPrincipal) auth.getPrincipal();
+		long id = principal.getId();
+		
 		model.addAttribute("createInfo", userService.getUserProfileInfo(id));
+		model.addAttribute("updateUser" , userService2.getUserInfo(id));
 		return "layout";
 	}
 	
-	@PostMapping("/add-info")
+	@PostMapping("/freelancer/add-info")
 	public String addInfo(UserProfile newInfo) {
-		userService.updateInfo(newInfo);
-		return "redirect:/manage-profile";
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserPrincipal principal = (UserPrincipal) auth.getPrincipal();
+		long id = principal.getId();
+		
+		userService.updateInfo(newInfo, id);
+		return "redirect:/freelancer/manage-profile";
+	}
+	
+	@GetMapping("/freelancer/add-experience") 
+	public String addExperience(Model model) {
+		model.addAttribute("view", "freelancer/profile/add_experience");
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserPrincipal principal = (UserPrincipal) auth.getPrincipal();
+		long id = principal.getId();
+		
+		model.addAttribute("createExperience", userExperience.getUserExperience(id));
+		return "layout";
+	}
+	
+	@PostMapping("/freelancer/add-experience")
+	public String addExperience(UserWorkExperience newInfo) {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserPrincipal principal = (UserPrincipal) auth.getPrincipal();
+		long id = principal.getId();
+		
+		User currUser = userService2.getUserInfo(id);
+		
+		userExperience.createUserExperience(new UserWorkExperience(currUser, newInfo.getTitle(), newInfo.getCompany(), newInfo.getLocation(), newInfo.getDateOfHire(), newInfo.getDateOfQuit(), newInfo.isCurrentlyWorking()));
+		return"redirect:/freelancer/manage-profile";
+	}
+	
+	@GetMapping("/freelancer/delete-experiences")
+	public String deleteAllExperience(UserWorkExperience expToDelete)	{
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserPrincipal principal = (UserPrincipal) auth.getPrincipal();
+		long id = principal.getId();
+		
+		List<UserWorkExperience> workExperienceList = userExperience.getAllByUserId(id);
+		
+		userExperience.deleteUserExperiences(workExperienceList);
+		return "redirect:/freelancer/manage-profile";	
+	}
+	
+	@GetMapping("/freelancer/delete-experience/{id}")
+	public String deleteExperience(@PathVariable(required=true ) Long id){
+		
+		userExperience.deleteUserExperience(id);
+		return "redirect:/freelancer/manage-profile";	
 	}
 	
 	

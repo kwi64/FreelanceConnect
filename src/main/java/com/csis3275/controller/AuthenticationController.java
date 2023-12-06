@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.csis3275.model.IUserRepository;
+import com.csis3275.model.Role;
 import com.csis3275.model.User;
 import com.csis3275.model.UserPrincipal;
+import com.csis3275.model.UserProfile;
 import com.csis3275.model.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,6 +23,9 @@ import jakarta.servlet.http.HttpServletResponse;
 @Controller
 public class AuthenticationController {
 
+	@Autowired
+	private IUserRepository userProfileRepository; 
+	
 	@Autowired
 	private UserService userDAO;
 
@@ -50,9 +56,12 @@ public class AuthenticationController {
 
 			return "register/register";
 		}
-
-		userDAO.createUser(user);
-
+		User createdUser = userDAO.createUser(new UserProfile(
+				user.getName(), user.getUsername(), user.getPassword(), 
+				user.getRole(),true,null,null,null,null,null,null
+				));
+		userProfileRepository.save(createdUser);
+		
 		attributes.addFlashAttribute("user", new User());
 		attributes.addFlashAttribute("success", "Account successfully created!. Please log in!");
 		

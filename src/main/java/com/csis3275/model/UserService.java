@@ -11,12 +11,31 @@ import org.springframework.stereotype.Service;
 public class UserService {
 	@Autowired
 	private IUserRepository repository;
+
+	public User getUserInfo(Long id) {
+		return (UserProfile) repository.findById(id).orElse(new UserProfile());
+	}
 	
+	public void updateInfo(UserProfile user) {
+		UserProfile updatedUser = (UserProfile) repository.findById(user.getId()).orElse(new UserProfile());
+		
+		if(user.getName() != null) {
+			updatedUser.setName(user.getName());
+		}
+		if(user.getUsername() != null) {
+			updatedUser.setUsername(user.getUsername());
+		}
+		if(user.getPassword() != null) {
+			updatedUser.setPassword(user.getPassword());
+		}
+		repository.save(updatedUser);
+	}
 	
 	public User createUser(User user) {
 		user.setUsername(user.getUsername().trim());
 		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
 		user.setEnabled(true);
+		
 		return repository.save(user);
 	}
 	

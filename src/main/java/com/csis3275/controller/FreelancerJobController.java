@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +35,11 @@ import com.csis3275.model.JobApplicationSkillService;
 import com.csis3275.model.JobApplicationStatus;
 import com.csis3275.model.JobApplicationWorkExperience;
 import com.csis3275.model.JobApplicationWorkExperienceService;
+import com.csis3275.model.UserExperienceServiceImpl;
 import com.csis3275.model.UserPrincipal;
+import com.csis3275.model.UserProfile;
+import com.csis3275.model.UserServiceImpl;
+import com.csis3275.model.UserWorkExperience;
 
 @Controller
 public class FreelancerJobController {
@@ -50,6 +55,12 @@ public class FreelancerJobController {
 
 	@Autowired
 	private JobApplicationSkillService jaSkillService;
+	
+	@Autowired
+	private UserServiceImpl upService;
+	
+	@Autowired
+	private UserExperienceServiceImpl upExperienceService;
 
 	@GetMapping(value = { "/freelancer/jobs", "/freelancer/jobs/{id}" })
 	public String jobs(Model model, @PathVariable Optional<Long> id) {
@@ -110,14 +121,48 @@ public class FreelancerJobController {
 		model.addAttribute("job_id", id);
 		Job selected = jobService.getJobPosting(id);
 
+		
+		
+		
 		if (selected != null) {
 			JobApplication application = jobApplicationService.getJobApplicationByUserIdAndJobId(principal.getId(),
 					selected.getID());
-
+			
+			UserProfile up = upService.getUserProfileInfo(principal.getId());
+			
+			if(application.getId() == 0) {
+				application.setName(up.getName());
+				application.setAddressLine1(up.getAddress1());
+				application.setAddressLine2(up.getAddress2());
+				application.setCity(up.getCity());
+				application.setProvince(up.getProvince());
+				application.setCountry(up.getCountry());
+			}
+			
+			
 			List<JobApplicationWorkExperience> workExperienceList = jaWorkExperienceService
 					.getAllByJobApplicationId(application.getId());
-			List<JobApplicationSkill> skillsList = jaSkillService.getAllByJobApplicationId(application.getId());
 
+			
+			
+			if(application.getId() == 0) {
+				List<UserWorkExperience> exps = upExperienceService.getAllByUserId(principal.getId());
+				for(var exp: exps) {
+					workExperienceList.add(new JobApplicationWorkExperience(application, exp.getTitle(), exp.getCompany(), exp.getLocation(), exp.getDateOfHire(), exp.getDateOfQuit(), exp.isCurrentlyWorking()));
+				}
+			}
+			
+			
+			List<JobApplicationSkill> skillsList = jaSkillService.getAllByJobApplicationId(application.getId());
+			if(application.getId() == 0) {
+				if(up.getSkills() != null) {
+					for(var skill: up.getSkills().split(",")) {
+						skillsList.add(new JobApplicationSkill(skill.trim()));
+					}
+				}
+			}
+			
+			
 			model.addAttribute("workExperienceList", workExperienceList);
 			model.addAttribute("skillList", skillsList);
 			
@@ -191,7 +236,9 @@ public class FreelancerJobController {
 		}
 
 		if (submittedViaEnter == true && (application.getAction() == null || application.getAction().equals("save"))) {
-			attributes.addFlashAttribute("success", "Successfully Saved!");
+			if(errors.size() == 0) {
+				attributes.addFlashAttribute("success", "Successfully Saved!");
+			}
 		}
 
 		if (application.getAction() != null && application.getAction().equals("next")) {
@@ -348,7 +395,7 @@ public class FreelancerJobController {
 					}
 				}
 				
-				if(experience.getToDate() != null) {
+				if(!experience.isCurrentlyWorking() && experience.getToDate() != null) {
 					Period ending = Period.between(experience.getToDate(), now);
 					if(ending.isNegative()) {
 						errors.put("workExperienceList_"+ i +"_toDate", "Invalid end date.");

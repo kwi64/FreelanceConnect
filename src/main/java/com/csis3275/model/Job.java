@@ -23,7 +23,7 @@ public class Job {
 	private String description;
 	private LocalDate validityStartDate;
 	private LocalDate validityEndDate;
-	private Long wage;
+	private String wage;
 	public Long getId() {
 		return ID;
 	}
@@ -36,7 +36,7 @@ public class Job {
 			String jDesc, 
 			LocalDate jValidityStartDate,
 			LocalDate jValidityEndDate,
-			Long jWage)	{
+			String jWage)	{
 		super();
 		this.ID = jID;
 		this.title = jTitle;
@@ -94,11 +94,11 @@ public class Job {
 		this.description = description;
 	}
 
-	public Long getWage() {
+	public String getWage() {
 		return wage;
 	}
 
-	public void setWage(Long wage) {
+	public void setWage(String wage) {
 		this.wage = wage;
 	}
 	public LocalDate getValidityStartDate() {

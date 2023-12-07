@@ -1,6 +1,8 @@
 package com.csis3275.tests_jba_82;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.CALLS_REAL_METHODS;
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -9,9 +11,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.csis3275.model.IUserRepository;
+import com.csis3275.model.UserService;
 
 class EditProfileTest {
-
+	
 	private static FirefoxDriver driver;
 
 	@BeforeAll
@@ -25,7 +31,6 @@ class EditProfileTest {
 	public static void tearDown() {
 		driver.quit();
 	}
-
 	
 	//Testing to ensure that after entering account info it is properly displayed in manage profile
 	@Test
@@ -67,6 +72,5 @@ class EditProfileTest {
 				+ "Country: Canada\n"
 				+ "Skills: Java, Selenium, Coding",
 				driver.findElement(By.xpath("/html/body/div/div[1]/div[2]/div/div[2]/div")).getText());
-
 	}
 }

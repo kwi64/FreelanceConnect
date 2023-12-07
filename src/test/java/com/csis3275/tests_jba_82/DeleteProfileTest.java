@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -25,14 +26,17 @@ import com.csis3275.model.IUserProfile;
 import com.csis3275.model.IUserRepository;
 import com.csis3275.model.Role;
 import com.csis3275.model.User;
+import com.csis3275.model.UserPrincipal;
 import com.csis3275.model.UserService;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 @SpringBootTest
 @AutoConfigureMockMvc
 class DeleteProfileTest {
 	
-//	@Autowired
-//	private MockMvc mvc;
+	@Autowired
+	private MockMvc mvc;
 	
 	@Autowired
 	private IUserRepository userProfileRepository; 
@@ -43,6 +47,11 @@ class DeleteProfileTest {
 	public static void setUp() {
 		FirefoxOptions options = new FirefoxOptions();
 		driver = new FirefoxDriver(options);
+		
+		String password = "testing";
+        UserPrincipal userPrincipal = new UserPrincipal(1, "Jack", "jack@test.com", "testing", Role.FREELANCER, true);
+        Authentication authentication = new UsernamePasswordAuthenticationToken(userPrincipal, password, userPrincipal.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 	}
 
 	@AfterAll
@@ -69,22 +78,21 @@ class DeleteProfileTest {
 		driver.findElement(By.id("password_again")).sendKeys("testing");
 		driver.findElement(By.id("freelancer")).click();
 		
-//		try {
-//			mvc.perform(MockMvcRequestBuilders
-//					.post("/register")
-//					.param("name", "Jack")
-//					.param("username", "jack@test.com")
-//					.param("password", "testing")
-//					.param("password_again", "testing")
-//					.param("role", "FREELANCER")
-//					.contentType(MediaType.MULTIPART_FORM_DATA)
-//					.accept(MediaType.TEXT_HTML));
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		try {
+			mvc.perform(MockMvcRequestBuilders
+					.post("/register")
+					.param("name", "Jack")
+					.param("username", "jack@test.com")
+					.param("password", "testing")
+					.param("password_again", "testing")
+					.param("role", "FREELANCER")
+					.contentType(MediaType.MULTIPART_FORM_DATA)
+					.accept(MediaType.TEXT_HTML));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		//Im not sure why it wont work unless i save it here
-		userProfileRepository.save(new User("Jack","jack@test.com","testing",Role.FREELANCER,true));
+		//userProfileRepository.save(new User("Jack","jack@test.com","testing",Role.FREELANCER,true));
 		
 		driver.findElement(By.cssSelector(".btn")).click();
 		//Login
@@ -95,16 +103,16 @@ class DeleteProfileTest {
 		driver.findElement(By.id("password")).sendKeys("testing");
 		driver.findElement(By.cssSelector(".btn")).click();
 		
-//		try {
-//			mvc.perform(MockMvcRequestBuilders
-//					.post("/login")
-//					.param("username", "jack@test.com")
-//					.param("password", "testing")
-//					.contentType(MediaType.MULTIPART_FORM_DATA)
-//					.accept(MediaType.TEXT_HTML));
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		try {
+			mvc.perform(MockMvcRequestBuilders
+					.post("/login")
+					.param("username", "jack@test.com")
+					.param("password", "testing")
+					.contentType(MediaType.MULTIPART_FORM_DATA)
+					.accept(MediaType.TEXT_HTML));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		driver.findElement(By.cssSelector(".nav-item:nth-child(2) > .nav-link")).click();
 		
@@ -112,15 +120,15 @@ class DeleteProfileTest {
 		
 		driver.findElement(By.linkText("Delete Profile")).click();
 		
-//		try {
-//			mvc.perform(MockMvcRequestBuilders
-//					.get("/freelancer/delete-profile")
-//					.accept(MediaType.TEXT_HTML));
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		try {
+			mvc.perform(MockMvcRequestBuilders
+					.get("/freelancer/delete-profile")
+					.accept(MediaType.TEXT_HTML));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 				
-		userProfileRepository.deleteById((long) 1);
+		//userProfileRepository.deleteById((long) 1);
 		assertEquals(false, userProfileRepository.existsById((long) 1));
 	}
 }

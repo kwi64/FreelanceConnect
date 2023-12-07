@@ -26,9 +26,6 @@ class UserProfileTest {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired 
-	private UserServiceImpl userService2;
-	
 	@Autowired
 	private IUserRepository userProfileRepository; 
 	

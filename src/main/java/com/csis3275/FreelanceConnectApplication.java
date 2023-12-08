@@ -64,9 +64,9 @@ public class FreelanceConnectApplication {
 	@Bean
 	CommandLineRunner seedJobs(JobService jobService) {
 		return (args) -> {
-			Job j1 = new Job(1L, "Software Engineer I", "EPASS Software", "New West, CA", "Lorem Ipsum", LocalDate.of(2023, 11, 23), LocalDate.of(2023, 12, 31), 12L);
-			Job j2 = new Job(2L, "Software Engineer II", "EPASS Software", "New West, CA", "Lorem Ipsum", LocalDate.of(2023, 10, 25), LocalDate.of(2023, 12, 31), 15L);
-			Job j3 = new Job(3L, "Software Engineer III", "EPASS Software", "New West, CA", "Lorem Ipsum", LocalDate.of(2022, 11, 22), LocalDate.of(2023, 12, 31), 15L);
+			Job j1 = new Job(1L, "Software Engineer I", "EPASS Software", "New West, CA", "Lorem Ipsum", LocalDate.of(2023, 11, 23), LocalDate.of(2023, 12, 31), "12");
+			Job j2 = new Job(2L, "Software Engineer II", "EPASS Software", "New West, CA", "Lorem Ipsum", LocalDate.of(2023, 10, 25), LocalDate.of(2023, 12, 31), "15");
+			Job j3 = new Job(3L, "Software Engineer III", "EPASS Software", "New West, CA", "Lorem Ipsum", LocalDate.of(2022, 11, 22), LocalDate.of(2023, 12, 31), "15");
 			
 			jobService.createJob(j1);
 			jobService.createJob(j2);

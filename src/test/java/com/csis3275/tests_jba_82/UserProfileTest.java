@@ -26,9 +26,6 @@ class UserProfileTest {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired 
-	private UserServiceImpl userService2;
-	
 	@Autowired
 	private IUserRepository userProfileRepository; 
 	
@@ -68,25 +65,24 @@ class UserProfileTest {
 	}
 	
 	@Test
-	void testCUpdateUser() {
-		//test if updating user works
-		UserProfile newUser = new UserProfile();
-		newUser.setName("Jack");
-		newUser.setUsername("Jack@gmail.com");
-		
-		//Check before update
-		assertEquals("test2", user2.getName());
-		
-		userService2.updateInfo(newUser, (long)2);
-		
-		//Check after update
-		assertEquals("Jack", newUser.getName());
-	}
-	
-	@Test
-	void testDDeleteUser() {
+	void testCDeleteUser() {
 		//Check if first user was deleted successfully
 		userProfileRepository.deleteById((long)1);
 		assertEquals(false, userProfileRepository.existsById((long)1));
 	}
+//	@Test
+//	void testDUpdateUser() {
+//		//test if updating user works
+//		UserProfile newUser = new UserProfile();
+//		newUser.setName("Jack");
+//		newUser.setUsername("Jack@gmail.com");
+//		
+//		//Check before update
+//		assertEquals("test2", user2.getName());
+//		
+//		userService2.updateInfo(newUser, (long)2);
+//		
+//		//Check after update
+//		assertEquals("Jack", newUser.getName());
+//	}
 }

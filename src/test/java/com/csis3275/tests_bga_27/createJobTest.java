@@ -1,8 +1,6 @@
 package com.csis3275.tests_bga_27;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.CALLS_REAL_METHODS;
-import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -11,7 +9,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class createJobTest {
 	
@@ -29,13 +26,23 @@ public class createJobTest {
 		driver.quit();
 	}
 	
-
+	 //This test creates a job and checks the details on the preview page
 	 @Test
 	  public void createJob() {
 	    driver.get("http://localhost:8080/login");
-	    driver.manage().window().setSize(new Dimension(1295, 695));
+	    driver.findElement(By.linkText("New a user?")).click();
+	    driver.findElement(By.id("name")).click();
+	    driver.findElement(By.id("name")).sendKeys("employerTest@connect.com");
 	    driver.findElement(By.id("username")).click();
-	    driver.findElement(By.id("username")).sendKeys("employer@connect.com");
+	    driver.findElement(By.id("username")).sendKeys("employerTest@connect.com");
+	    driver.findElement(By.id("password")).click();
+	    driver.findElement(By.id("password")).sendKeys("password");
+	    driver.findElement(By.id("password_again")).click();
+	    driver.findElement(By.id("password_again")).sendKeys("password");
+	    driver.findElement(By.id("employer")).click();
+	    driver.findElement(By.cssSelector(".btn")).click();
+	    driver.findElement(By.id("username")).click();
+	    driver.findElement(By.id("username")).sendKeys("employerTest@connect.com");
 	    driver.findElement(By.id("password")).click();
 	    driver.findElement(By.id("password")).sendKeys("password");
 	    driver.findElement(By.cssSelector(".btn")).click();

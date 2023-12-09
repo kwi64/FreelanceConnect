@@ -60,6 +60,14 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- Added Selenium Repository for class demo - kwi - 2023-12-04 -->
+		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>4.15.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>

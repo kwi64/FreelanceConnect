@@ -19,6 +19,8 @@ public class viewApplicationTest {
 		FirefoxOptions options = new FirefoxOptions();
 
 		driver = new FirefoxDriver(options);
+		
+		
 	}
 
 	@AfterAll
@@ -32,6 +34,17 @@ public class viewApplicationTest {
 	  public void viewApplication() {
 	    driver.get("http://localhost:8080/login");
 	    driver.manage().window().setSize(new Dimension(1295, 695));
+	    driver.findElement(By.linkText("New a user?")).click();
+	    driver.findElement(By.id("name")).click();
+	    driver.findElement(By.id("name")).sendKeys("employerTest@connect.com");
+	    driver.findElement(By.id("username")).click();
+	    driver.findElement(By.id("username")).sendKeys("employerTest@connect.com");
+	    driver.findElement(By.id("password")).click();
+	    driver.findElement(By.id("password")).sendKeys("password");
+	    driver.findElement(By.id("password_again")).click();
+	    driver.findElement(By.id("password_again")).sendKeys("password");
+	    driver.findElement(By.id("employer")).click();
+	    driver.findElement(By.cssSelector(".btn")).click();
 	    driver.findElement(By.id("username")).click();
 	    driver.findElement(By.id("username")).sendKeys("employerTest@connect.com");
 	    driver.findElement(By.id("password")).click();
@@ -59,12 +72,24 @@ public class viewApplicationTest {
 	    driver.findElement(By.cssSelector("p > input")).click();
 	    driver.findElement(By.cssSelector(".btn-outline-warning")).click();
 	    driver.findElement(By.linkText("Logout")).click();
+	    
+	    driver.findElement(By.linkText("New a user?")).click();
+	    driver.findElement(By.id("name")).click();
+	    driver.findElement(By.id("name")).sendKeys("freelancerTest@connect.com");
+	    driver.findElement(By.id("username")).click();
+	    driver.findElement(By.id("username")).sendKeys("freelancerTest@connect.com");
+	    driver.findElement(By.id("password")).click();
+	    driver.findElement(By.id("password")).sendKeys("password");
+	    driver.findElement(By.id("password_again")).click();
+	    driver.findElement(By.id("password_again")).sendKeys("password");
+	    driver.findElement(By.id("freelancer")).click();
+	    driver.findElement(By.cssSelector(".btn")).click();
 	    driver.findElement(By.id("username")).click();
 	    driver.findElement(By.id("username")).sendKeys("freelancerTest@connect.com");
 	    driver.findElement(By.id("password")).click();
 	    driver.findElement(By.id("password")).sendKeys("password");
 	    driver.findElement(By.cssSelector(".btn")).click();
-	    driver.findElement(By.cssSelector(".d-flex:nth-child(1) > .m-0:nth-child(3)")).click();
+	    driver.findElement(By.cssSelector("a.d-flex:nth-child(1) > div:nth-child(1)")).click();
 	    driver.findElement(By.linkText("Apply Now")).click();
 	    driver.findElement(By.id("addressLine1")).click();
 	    driver.findElement(By.id("addressLine1")).sendKeys("Address test");

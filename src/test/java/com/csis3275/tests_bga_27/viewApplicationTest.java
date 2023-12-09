@@ -112,7 +112,7 @@ public class viewApplicationTest {
 	    driver.findElement(By.cssSelector(".nav-item:nth-child(1) > .nav-link")).click();
 	    driver.findElement(By.cssSelector("tr:nth-child(5) .btn")).click();
 	    
-	    assertEquals(driver.findElement(By.cssSelector("div.row:nth-child(2) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(1)")).getText(),"Freelancer");
+	    assertEquals(driver.findElement(By.cssSelector("div.row:nth-child(2) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(1)")).getText(),"freelancerTest@connect.com");
 	    assertEquals(driver.findElement(By.cssSelector("div.row:nth-child(2) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2)")).getText(),"Canada");
 	  }
 

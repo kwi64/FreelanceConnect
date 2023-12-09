@@ -71,6 +71,13 @@ public class createJobTest {
 	    assertEquals(driver.findElement(By.cssSelector("div.container-fluid:nth-child(2) > p:nth-child(5)")).getText(),"22");
 	    assertEquals(driver.findElement(By.cssSelector("div.container-fluid:nth-child(2) > p:nth-child(6)")).getText(),"2023-12-03 - 2023-12-16");
 	    assertEquals(driver.findElement(By.cssSelector("div.container-fluid:nth-child(2) > p:nth-child(7)")).getText(),"Job Description");
+	    
+	    //This part tests if it is displayed in view Job Postings page correctly
+	    driver.findElement(By.cssSelector("p > input")).click();
+	    
+	    assertEquals(driver.findElement(By.cssSelector("div.row:nth-child(2) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(5) > td:nth-child(1)")).getText(),"Job Title");
+	    assertEquals(driver.findElement(By.cssSelector("div.row:nth-child(2) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(5) > td:nth-child(2)")).getText(),"Employer Name");
+	    assertEquals(driver.findElement(By.cssSelector("div.row:nth-child(2) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(5) > td:nth-child(3)")).getText(),"Canada");
 	 }
 	 
 	 
